@@ -188,12 +188,16 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 //please change token and building id to your own building project in cloud.
-                mSails.loadCloudBuilding("bd10034e8a284673945c1497634087cc", "537db26eab5c03141300071e", new SAILS.OnFinishCallback() {
+                // 29008b47625243bca00ffdd4e52af10f 5508f92fd98797a814001afc
+                // 96af8361581f43a1b7a27ba618aa6695 55082d4ad98797a814001ace
+                mSails.loadCloudBuilding("29008b47625243bca00ffdd4e52af10f", "5508f92fd98797a814001afc", new SAILS.OnFinishCallback() {
                     @Override
-                    public void onSuccess(String response) {
+                    public void onSuccess(final String response) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Toast t = Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT);
+                                t.show();
                                 mapViewInitial();
                                 routingInitial();
                                 slidingMenuInitial();

@@ -1,113 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<pre-dex-items>
+<items version="2" >
 
     <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.7\SAILS_SAMPLE_CODE_V1.7_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\classes-dfcbb085388b097e7c88f56e4475a217fd3070a7.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.7\SAILS_SAMPLE_CODE_V1.7_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\classes.jar"
+        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/libs/SAILS_SDK_V1.73_Published.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="87c8f6d7a779430dc1a04f1830c6f60f5b78dd83"/>
+        sha1="2b4ea6e0b35513f0ac8d736342ebca9d6bd7d719">
+        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/SAILS_SDK_V1.73_Published-18524634433085176bb48474b90e8eef9e0c42da.jar" />
+    </item>
     <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.6\SAILS_SAMPLE_CODE_V1.6_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\SAILS_SDK_V1.6_Published-91b51f8b56ebffc0a814b27af22e4b580dbb8695.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.6\SAILS_SAMPLE_CODE_V1.6_Published\androidstudio_sample\SampleActivity\Sample\libs\SAILS_SDK_V1.6_Published.jar"
+        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/SampleActivity/SlidingMenu/unspecified/libs/android-support-v4.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="927a17abe61ead1c24006709dcf98410838ead2e"/>
+        sha1="48c94ae70fa65718b382098237806a5909bb096e">
+        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/android-support-v4-1220bb997299c802e34dc845017714d7ae2db10a.jar" />
+    </item>
     <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.73\SAILS_SAMPLE_CODE_V1.73_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\SAILS_SDK_V1.73_Published-916140f14ddb20f9daa05068b28c8a0741a597b2.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.73\SAILS_SAMPLE_CODE_V1.73_Published\androidstudio_sample\SampleActivity\Sample\libs\SAILS_SDK_V1.73_Published.jar"
+        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/SampleActivity/SlidingMenu/unspecified/classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="774b36f86c664572b3751c83fb9d6046a1a7ef92"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.6\SAILS_SAMPLE_CODE_V1.6_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\android-support-v4-3c07fe9d8f1ca42069b724f658c87c2f951f5ed7.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.6\SAILS_SAMPLE_CODE_V1.6_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\libs\android-support-v4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="48c94ae70fa65718b382098237806a5909bb096e"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.72\SAILS_SAMPLE_CODE_V1.72_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\android-support-v4-943635cdba47cb0fe9ac74247ffdf04ef70b2373.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.72\SAILS_SAMPLE_CODE_V1.72_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\libs\android-support-v4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="48c94ae70fa65718b382098237806a5909bb096e"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.71\SAILS_SAMPLE_CODE_V1.71_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\classes-ea0c8e86551fbc57afa146ca9521140a0c6cad77.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.71\SAILS_SAMPLE_CODE_V1.71_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="14490dd489cf4c99e8ccc33a39004468f3669ba7"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.5\SAILS_SAMPLE_CODE_V1.5_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\SAILS_SDK_V1.5_Published-728c061c43c4be87faeaebc22a7fda08c9b07568.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.5\SAILS_SAMPLE_CODE_V1.5_Published\androidstudio_sample\SampleActivity\Sample\libs\SAILS_SDK_V1.5_Published.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="97221139a5de364c7242a30e8bd29a5ce2d6ddb4"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.71\SAILS_SAMPLE_CODE_V1.71_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\SAILS_SDK_V1.71_Published-743b4e151b483a3aea287509c3c8bbead6cc96ae.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.71\SAILS_SAMPLE_CODE_V1.71_Published\androidstudio_sample\SampleActivity\Sample\libs\SAILS_SDK_V1.71_Published.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="79b9e422cc84f44c884d317013a761aa42c596ef"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.6\SAILS_SAMPLE_CODE_V1.6_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\classes-e607de942ae0c8212f7eeb3eb65e5007eae9cd02.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.6\SAILS_SAMPLE_CODE_V1.6_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="e99c2521bf1fc4dc650b5bdc04130b6f71204660"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.5\SAILS_SAMPLE_CODE_V1.5_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\android-support-v4-fa4d5bcd6198500de7dad46c19b67f4043c1dd8b.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.5\SAILS_SAMPLE_CODE_V1.5_Published\androidstudio_sample\SampleActivity\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\libs\android-support-v4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="48c94ae70fa65718b382098237806a5909bb096e"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.73\SAILS_SAMPLE_CODE_V1.73_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\android-support-v4-08cb12cccf4fb5c280e515c57b298cf713df99df.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.73\SAILS_SAMPLE_CODE_V1.73_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\libs\android-support-v4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="48c94ae70fa65718b382098237806a5909bb096e"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.73\SAILS_SAMPLE_CODE_V1.73_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\classes-364bf1cd46ff3f0de40b0ee46d21b9ca8a51f3f8.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.73\SAILS_SAMPLE_CODE_V1.73_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="cf72af08f597fb512c6450c3b15a757872064358"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.7\SAILS_SAMPLE_CODE_V1.7_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\android-support-v4-e0c2ba34b163428cacde69abc501b62599d703da.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.7\SAILS_SAMPLE_CODE_V1.7_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\libs\android-support-v4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="48c94ae70fa65718b382098237806a5909bb096e"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.7\SAILS_SAMPLE_CODE_V1.7_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\SAILS_SDK_V1.7_Published-b45233735116be4a7783a9f828687f9ffb74ff78.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.7\SAILS_SAMPLE_CODE_V1.7_Published\androidstudio_sample\SampleActivity\Sample\libs\SAILS_SDK_V1.7_Published.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="e9f1034f6e0fde1957b5c0e3d882f620d87cfbba"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.72\SAILS_SAMPLE_CODE_V1.72_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\SAILS_SDK_V1.72_Published-c2008f9b6aa20e72752dce78f8178e58adf673b2.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.72\SAILS_SAMPLE_CODE_V1.72_Published\androidstudio_sample\SampleActivity\Sample\libs\SAILS_SDK_V1.72_Published.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="ad9786cfd8d5b1d19804fdd672ce8ff1cfe4ac99"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.5\SAILS_SAMPLE_CODE_V1.5_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\classes-ad0a33862f5fba97e20a47aad6fb0b870a83a6f1.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.5\SAILS_SAMPLE_CODE_V1.5_Published\androidstudio_sample\SampleActivity\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="d9e217ef067c3198a51f3139793bdc4c97dd3e15"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.71\SAILS_SAMPLE_CODE_V1.71_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\android-support-v4-45aab8a7ba27942f940a124c5fb02603f0138083.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.71\SAILS_SAMPLE_CODE_V1.71_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\libs\android-support-v4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="48c94ae70fa65718b382098237806a5909bb096e"/>
-    <item
-        dex="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.72\SAILS_SAMPLE_CODE_V1.72_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\pre-dexed\debug\classes-7c628847635c8539af37230911f93930108d7610.jar"
-        jar="D:\SAILS_Project\SDK\SAILS_Android_SDK_V1.72\SAILS_SAMPLE_CODE_V1.72_Published\androidstudio_sample\SampleActivity\Sample\build\intermediates\exploded-aar\SampleActivity\SlidingMenu\unspecified\classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="cbdc8b176b40e0ebaacbf400bcf0bbc0d54314b0"/>
+        sha1="7f30db940ee63cedae4a4c13ad6efb41c3799a6d">
+        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-1bf8808191a87cc6e0b3bc159caa479f986f41ac.jar" />
+    </item>
 
-</pre-dex-items>
+</items>

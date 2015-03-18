@@ -45,7 +45,7 @@
             android:src="@drawable/maplogo"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <Spinner
             android:layout_width="fill_parent"
@@ -89,6 +89,7 @@
             android:singleLine="false"
             android:textColor="@android:color/white"
             android:background="@android:color/black"
+            android:visibility="invisible"
             android:text="@string/usage"
             android:padding="5dp" />
 
