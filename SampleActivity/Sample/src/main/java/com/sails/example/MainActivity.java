@@ -52,8 +52,8 @@ public class MainActivity extends Activity {
     ImageView zoomin;
     ImageView zoomout;
     ImageView lockcenter;
-    Button endRouteButton;
-    Button pinMarkerButton;
+//    Button endRouteButton;
+//    Button pinMarkerButton;
     TextView distanceView;
     TextView currentFloorDistanceView;
     TextView msgView;
@@ -86,8 +86,8 @@ public class MainActivity extends Activity {
         zoomin = (ImageView) findViewById(R.id.zoomin);
         zoomout = (ImageView) findViewById(R.id.zoomout);
         lockcenter = (ImageView) findViewById(R.id.lockcenter);
-        endRouteButton = (Button) findViewById(R.id.stopRoute);
-        pinMarkerButton = (Button) findViewById(R.id.pinMarker);
+//        endRouteButton = (Button) findViewById(R.id.stopRoute);
+//        pinMarkerButton = (Button) findViewById(R.id.pinMarker);
         distanceView = (TextView) findViewById(R.id.distanceView);
         distanceView.setVisibility(View.INVISIBLE);
         currentFloorDistanceView = (TextView) findViewById(R.id.currentFloorDistanceView);
@@ -101,10 +101,10 @@ public class MainActivity extends Activity {
         zoomin.setOnClickListener(controlListener);
         zoomout.setOnClickListener(controlListener);
         lockcenter.setOnClickListener(controlListener);
-        endRouteButton.setOnClickListener(controlListener);
-        endRouteButton.setVisibility(View.INVISIBLE);
-        pinMarkerButton.setOnClickListener(controlListener);
-        pinMarkerButton.setVisibility(View.VISIBLE);
+//        endRouteButton.setOnClickListener(controlListener);
+//        endRouteButton.setVisibility(View.INVISIBLE);
+//        pinMarkerButton.setOnClickListener(controlListener);
+//        pinMarkerButton.setVisibility(View.VISIBLE);
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
         expandableListView.setOnChildClickListener(childClickListener);
 
@@ -196,7 +196,7 @@ public class MainActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast t = Toast.makeText(getBaseContext(), response, Toast.LENGTH_SHORT);
+                                Toast t = Toast.makeText(getBaseContext(), "Map loaded", Toast.LENGTH_SHORT);
                                 t.show();
                                 mapViewInitial();
                                 routingInitial();
@@ -249,15 +249,15 @@ public class MainActivity extends Activity {
                     //set routing path's color.
                     mSailsMapView.getRoutingManager().getPathPaint().setColor(0xFF35b3e5);
 
-                    endRouteButton.setVisibility(View.VISIBLE);
+//                    endRouteButton.setVisibility(View.VISIBLE);
                     currentFloorDistanceView.setVisibility(View.VISIBLE);
                     msgView.setVisibility(View.VISIBLE);
 
                 } else {
                     mSailsMapView.getRoutingManager().setTargetMakerDrawable(Marker.boundCenterBottom(getResources().getDrawable(R.drawable.map_destination)));
                     mSailsMapView.getRoutingManager().getPathPaint().setColor(0xFF85b038);
-                    if (mSailsMapView.getRoutingManager().getStartRegion() != null)
-                        endRouteButton.setVisibility(View.VISIBLE);
+//                    if (mSailsMapView.getRoutingManager().getStartRegion() != null)
+//                        endRouteButton.setVisibility(View.VISIBLE);
                 }
 
                 //set routing end point location.
@@ -337,6 +337,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        // TODO: They style of choosing the floor need to be updated
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mSails.getFloorDescList());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         floorList.setAdapter(adapter);
@@ -473,10 +474,12 @@ public class MainActivity extends Activity {
                 }
                 eAdapter = new ExpandableAdapter(getBaseContext(), groups, childs);
                 expandableListView.setAdapter(eAdapter);
+                /* TODO: Change this to init the new list view with search function */
             }
         });
     }
 
+    /* TODO: This will be changed to onItemClick. Maybe*/
     ExpandableListView.OnChildClickListener childClickListener = new ExpandableListView.OnChildClickListener() {
         @Override
         public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -533,22 +536,23 @@ public class MainActivity extends Activity {
                     //if map control mode is none, then set mode to loction center lock when button click.
                     mSailsMapView.setMode(mSailsMapView.getMode() | SAILSMapView.LOCATION_CENTER_LOCK);
                 }
-            } else if (v == endRouteButton) {
-                endRouteButton.setVisibility(View.INVISIBLE);
-                distanceView.setVisibility(View.INVISIBLE);
-                currentFloorDistanceView.setVisibility(View.INVISIBLE);
-                msgView.setVisibility(View.INVISIBLE);
-                //end route.
-                mSailsMapView.getRoutingManager().disableHandler();
-            } else if (v == pinMarkerButton) {
-                Toast.makeText(getApplication(), "Please Touch Map and Set PinMarker.", Toast.LENGTH_SHORT).show();
-                mSailsMapView.getPinMarkerManager().setOnPinMarkerGenerateCallback(Marker.boundCenterBottom(getResources().getDrawable(R.drawable.parking_target)), new PinMarkerManager.OnPinMarkerGenerateCallback() {
-                    @Override
-                    public void OnGenerate(MarkerManager.LocationRegionMarker locationRegionMarker) {
-                        Toast.makeText(getApplication(), "One PinMarker Generated.", Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
+//            else if (v == endRouteButton) {
+//                endRouteButton.setVisibility(View.INVISIBLE);
+//                distanceView.setVisibility(View.INVISIBLE);
+//                currentFloorDistanceView.setVisibility(View.INVISIBLE);
+//                msgView.setVisibility(View.INVISIBLE);
+//                //end route.
+//                mSailsMapView.getRoutingManager().disableHandler();
+//            } else if (v == pinMarkerButton) {
+//                Toast.makeText(getApplication(), "Please Touch Map and Set PinMarker.", Toast.LENGTH_SHORT).show();
+//                mSailsMapView.getPinMarkerManager().setOnPinMarkerGenerateCallback(Marker.boundCenterBottom(getResources().getDrawable(R.drawable.parking_target)), new PinMarkerManager.OnPinMarkerGenerateCallback() {
+//                    @Override
+//                    public void OnGenerate(MarkerManager.LocationRegionMarker locationRegionMarker) {
+//                        Toast.makeText(getApplication(), "One PinMarker Generated.", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
         }
     };
 
@@ -581,32 +585,32 @@ public class MainActivity extends Activity {
 
                 return true;
 
-            case R.id.start_location_engine:
-                if (!mSails.isLocationEngineStarted()) {
-                    mSails.startLocatingEngine();
-                    mSailsMapView.setLocatorMarkerVisible(true);
-                    Toast.makeText(this, "Start Location Engine", Toast.LENGTH_SHORT).show();
-                    mSailsMapView.setMode(SAILSMapView.LOCATION_CENTER_LOCK | SAILSMapView.FOLLOW_PHONE_HEADING);
-                    lockcenter.setVisibility(View.VISIBLE);
-                    endRouteButton.setVisibility(View.INVISIBLE);
-                }
-
-                return true;
-
-            case R.id.stop_location_engine:
-                if (mSails.isLocationEngineStarted()) {
-                    mSails.stopLocatingEngine();
-                    mSailsMapView.setLocatorMarkerVisible(false);
-                    mSailsMapView.setMode(SAILSMapView.GENERAL);
-                    mSailsMapView.getRoutingManager().disableHandler();
-                    pinMarkerButton.setVisibility(View.VISIBLE);
-                    endRouteButton.setVisibility(View.INVISIBLE);
-                    distanceView.setVisibility(View.INVISIBLE);
-                    currentFloorDistanceView.setVisibility(View.INVISIBLE);
-                    msgView.setVisibility(View.INVISIBLE);
-                    Toast.makeText(this, "Stop Location Engine", Toast.LENGTH_SHORT).show();
-                }
-                return true;
+//            case R.id.start_location_engine:
+//                if (!mSails.isLocationEngineStarted()) {
+//                    mSails.startLocatingEngine();
+//                    mSailsMapView.setLocatorMarkerVisible(true);
+//                    Toast.makeText(this, "Start Location Engine", Toast.LENGTH_SHORT).show();
+//                    mSailsMapView.setMode(SAILSMapView.LOCATION_CENTER_LOCK | SAILSMapView.FOLLOW_PHONE_HEADING);
+//                    lockcenter.setVisibility(View.VISIBLE);
+//                    endRouteButton.setVisibility(View.INVISIBLE);
+//                }
+//
+//                return true;
+//
+//            case R.id.stop_location_engine:
+//                if (mSails.isLocationEngineStarted()) {
+//                    mSails.stopLocatingEngine();
+//                    mSailsMapView.setLocatorMarkerVisible(false);
+//                    mSailsMapView.setMode(SAILSMapView.GENERAL);
+//                    mSailsMapView.getRoutingManager().disableHandler();
+//                    pinMarkerButton.setVisibility(View.VISIBLE);
+//                    endRouteButton.setVisibility(View.INVISIBLE);
+//                    distanceView.setVisibility(View.INVISIBLE);
+//                    currentFloorDistanceView.setVisibility(View.INVISIBLE);
+//                    msgView.setVisibility(View.INVISIBLE);
+//                    Toast.makeText(this, "Stop Location Engine", Toast.LENGTH_SHORT).show();
+//                }
+//                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -630,82 +634,5 @@ public class MainActivity extends Activity {
         finish();
         super.onBackPressed();
         ((FrameLayout) findViewById(R.id.SAILSMap)).removeAllViews();
-    }
-
-    class ExpandableAdapter extends BaseExpandableListAdapter {
-
-        private Context context;
-        List<Map<String, String>> groups;
-        List<List<Map<String, LocationRegion>>> childs;
-
-        public ExpandableAdapter(Context context, List<Map<String, String>> groups, List<List<Map<String, LocationRegion>>> childs) {
-            this.context = context;
-            this.groups = groups;
-            this.childs = childs;
-        }
-
-        @Override
-        public int getGroupCount() {
-            return groups.size();
-        }
-
-        @Override
-        public int getChildrenCount(int groupPosition) {
-            return childs.get(groupPosition).size();
-        }
-
-        @Override
-        public Object getGroup(int groupPosition) {
-            return groups.get(groupPosition);
-        }
-
-        @Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return childs.get(groupPosition).get(childPosition);
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return groupPosition;
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {
-            return childPosition;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return false;
-        }
-
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            LinearLayout linearLayout = (LinearLayout) layoutInflater.inflate(R.layout.group, null);
-            String text = ((Map<String, String>) getGroup(groupPosition)).get("group");
-            TextView tv = (TextView) linearLayout.findViewById(R.id.group_tv);
-            tv.setText(text);
-            linearLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_dark));
-            tv.setTextColor(getResources().getColor(android.R.color.white));
-            return linearLayout;
-        }
-
-        @Override
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            LinearLayout linearLayout = (LinearLayout) layoutInflater.inflate(R.layout.child, null);
-            LocationRegion lr = ((Map<String, LocationRegion>) getChild(groupPosition, childPosition)).get("child");
-            TextView tv = (TextView) linearLayout.findViewById(R.id.child_tv);
-            tv.setText(lr.getName());
-            ImageView imageView = (ImageView) linearLayout.findViewById(R.id.child_iv);
-            imageView.setImageResource(R.drawable.expand_item);
-            return linearLayout;
-        }
-
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return true;
-        }
     }
 }
