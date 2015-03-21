@@ -4,43 +4,29 @@
     android:layout_height="fill_parent" >
 
     <TextView
-        android:id="@+id/ranklabel"
+        android:id="@+id/mapItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ranklabel" />
+        android:text="@string/map_item_label" />
 
     <TextView
         android:id="@+id/rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/ranklabel" />
+        android:layout_toRightOf="@+id/mapItem" />
 
     <TextView
-        android:id="@+id/countrylabel"
+        android:id="@+id/floorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ranklabel"
-        android:text="@string/countrylabel" />
+        android:layout_below="@+id/mapItem"
+        android:text="@string/floor_name_label" />
 
     <TextView
         android:id="@+id/country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rank"
-        android:layout_toRightOf="@+id/countrylabel" />
-
-    <TextView
-        android:id="@+id/populationlabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/countrylabel"
-        android:text="@string/populationlabel" />
-
-    <TextView
-        android:id="@+id/population"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/country"
-        android:layout_toRightOf="@+id/populationlabel" />
+        android:layout_toRightOf="@+id/floorName" />
 
 </RelativeLayout>

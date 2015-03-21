@@ -1,5 +1,6 @@
 package com.sails.example;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -489,6 +490,16 @@ public class MainActivity extends Activity {
 //                eAdapter = new ExpandableAdapter(getBaseContext(), groups, childs);
 //                expandableListView.setAdapter(eAdapter);
                 /* TODO: Change this to init the new list view with search function */
+                ArrayList<MapItem> items = new ArrayList<MapItem>();
+                for (String floorName : mSails.getFloorNameList()) {
+                    String floorDescription = mSails.getFloorDescription(floorName);
+                    for (LocationRegion lr : mSails.getLocationRegionList(floorName)) {
+                        if (lr.getName() == null || lr.getName().length() == 0)
+                            continue;
+                        MapItem item = new MapItem(lr.getName(), floorName, floorDescription, lr);
+                        items.add(item);
+                    }
+                }
                 rank = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
 
                 country = new String[] { "China", "India", "United States",
@@ -501,6 +512,7 @@ public class MainActivity extends Activity {
 
                 // Locate the ListView in listview_main.xml
                 list = (ListView) findViewById(R.id.listview);
+                list.setOnItemClickListener(listClickListener);
 
                 for (int i = 0; i < rank.length; i++)
                 {
@@ -511,7 +523,7 @@ public class MainActivity extends Activity {
                 }
 
                 // Pass results to ListViewAdapter Class
-                ladapter = new ListViewAdapter(MainActivity.this, arraylist);
+                ladapter = new ListViewAdapter(MainActivity.this, arraylist, items);
 
                 // Binds the Adapter to the ListView
                 list.setAdapter(ladapter);
@@ -544,13 +556,11 @@ public class MainActivity extends Activity {
             }
         });
     }
-
-    /* TODO: This will be changed to onItemClick. Maybe*/
-    ExpandableListView.OnChildClickListener childClickListener = new ExpandableListView.OnChildClickListener() {
+    ListView.OnItemClickListener listClickListener = new ListView.OnItemClickListener() {
         @Override
-        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
-            LocationRegion lr = eAdapter.childs.get(groupPosition).get(childPosition).get("child");
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            ListViewAdapter.ViewHolder viewHolder = (ListViewAdapter.ViewHolder)view.getTag();
+            LocationRegion lr = viewHolder.lr;
 
             if (!lr.getFloorName().equals(mSailsMapView.getCurrentBrowseFloorName())) {
                 mSailsMapView.loadFloorMap(lr.getFloorName());
@@ -560,9 +570,26 @@ public class MainActivity extends Activity {
             GeoPoint poi = new GeoPoint(lr.getCenterLatitude(), lr.getCenterLongitude());
             mSailsMapView.setAnimationMoveMapTo(poi);
             menu.showContent();
-            return false;
         }
     };
+
+//    ExpandableListView.OnChildClickListener childClickListener = new ExpandableListView.OnChildClickListener() {
+//        @Override
+//        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+//
+//            LocationRegion lr = eAdapter.childs.get(groupPosition).get(childPosition).get("child");
+//
+//            if (!lr.getFloorName().equals(mSailsMapView.getCurrentBrowseFloorName())) {
+//                mSailsMapView.loadFloorMap(lr.getFloorName());
+//                mSailsMapView.getMapViewPosition().setZoomLevel((byte) 19);
+//                Toast.makeText(getBaseContext(), mSails.getFloorDescription(lr.getFloorName()), Toast.LENGTH_SHORT).show();
+//            }
+//            GeoPoint poi = new GeoPoint(lr.getCenterLatitude(), lr.getCenterLongitude());
+//            mSailsMapView.setAnimationMoveMapTo(poi);
+//            menu.showContent();
+//            return false;
+//        }
+//    };
 
     View.OnClickListener controlListener = new View.OnClickListener() {
         @Override
