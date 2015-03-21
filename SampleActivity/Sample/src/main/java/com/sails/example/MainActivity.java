@@ -3,6 +3,7 @@ package com.sails.example;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -27,6 +28,8 @@ import android.app.Service;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,10 +40,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,12 +64,21 @@ public class MainActivity extends Activity {
     TextView msgView;
     SlidingMenu menu;
     ActionBar actionBar;
-    ExpandableListView expandableListView;
+//    ExpandableListView expandableListView;
     ExpandableAdapter eAdapter;
     Vibrator mVibrator;
     Spinner floorList;
     ArrayAdapter<String> adapter;
     byte zoomSav = 0;
+
+    // Test script for search
+    ListView list;
+    ListViewAdapter ladapter;
+    EditText editsearch;
+    String[] rank;
+    String[] country;
+    String[] population;
+    ArrayList<WorldPopulation> arraylist = new ArrayList<WorldPopulation>();
 
 
     @Override
@@ -105,8 +119,8 @@ public class MainActivity extends Activity {
 //        endRouteButton.setVisibility(View.INVISIBLE);
 //        pinMarkerButton.setOnClickListener(controlListener);
 //        pinMarkerButton.setVisibility(View.VISIBLE);
-        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        expandableListView.setOnChildClickListener(childClickListener);
+//        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+//        expandableListView.setOnChildClickListener(childClickListener);
 
         LocationRegion.FONT_LANGUAGE = LocationRegion.NORMAL;
 
@@ -453,28 +467,80 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 //1st stage groups
-                List<Map<String, String>> groups = new ArrayList<Map<String, String>>();
-                //2nd stage groups
-                List<List<Map<String, LocationRegion>>> childs = new ArrayList<List<Map<String, LocationRegion>>>();
-                for (String mS : mSails.getFloorNameList()) {
-                    Map<String, String> group_item = new HashMap<String, String>();
-                    group_item.put("group", mSails.getFloorDescription(mS));
-                    groups.add(group_item);
-
-                    List<Map<String, LocationRegion>> child_items = new ArrayList<Map<String, LocationRegion>>();
-                    for (LocationRegion mlr : mSails.getLocationRegionList(mS)) {
-                        if (mlr.getName() == null || mlr.getName().length() == 0)
-                            continue;
-
-                        Map<String, LocationRegion> childData = new HashMap<String, LocationRegion>();
-                        childData.put("child", mlr);
-                        child_items.add(childData);
-                    }
-                    childs.add(child_items);
-                }
-                eAdapter = new ExpandableAdapter(getBaseContext(), groups, childs);
-                expandableListView.setAdapter(eAdapter);
+//                List<Map<String, String>> groups = new ArrayList<Map<String, String>>();
+//                //2nd stage groups
+//                List<List<Map<String, LocationRegion>>> childs = new ArrayList<List<Map<String, LocationRegion>>>();
+//                for (String mS : mSails.getFloorNameList()) {
+//                    Map<String, String> group_item = new HashMap<String, String>();
+//                    group_item.put("group", mSails.getFloorDescription(mS));
+//                    groups.add(group_item);
+//
+//                    List<Map<String, LocationRegion>> child_items = new ArrayList<Map<String, LocationRegion>>();
+//                    for (LocationRegion mlr : mSails.getLocationRegionList(mS)) {
+//                        if (mlr.getName() == null || mlr.getName().length() == 0)
+//                            continue;
+//
+//                        Map<String, LocationRegion> childData = new HashMap<String, LocationRegion>();
+//                        childData.put("child", mlr);
+//                        child_items.add(childData);
+//                    }
+//                    childs.add(child_items);
+//                }
+//                eAdapter = new ExpandableAdapter(getBaseContext(), groups, childs);
+//                expandableListView.setAdapter(eAdapter);
                 /* TODO: Change this to init the new list view with search function */
+                rank = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+
+                country = new String[] { "China", "India", "United States",
+                        "Indonesia", "Brazil", "Pakistan", "Nigeria", "Bangladesh",
+                        "Russia", "Japan" };
+
+                population = new String[] { "1,354,040,000", "1,210,193,422",
+                        "315,761,000", "237,641,326", "193,946,886", "182,912,000",
+                        "170,901,000", "152,518,015", "143,369,806", "127,360,000" };
+
+                // Locate the ListView in listview_main.xml
+                list = (ListView) findViewById(R.id.listview);
+
+                for (int i = 0; i < rank.length; i++)
+                {
+                    WorldPopulation wp = new WorldPopulation(rank[i], country[i],
+                            population[i]);
+                    // Binds all strings into an array
+                    arraylist.add(wp);
+                }
+
+                // Pass results to ListViewAdapter Class
+                ladapter = new ListViewAdapter(MainActivity.this, arraylist);
+
+                // Binds the Adapter to the ListView
+                list.setAdapter(ladapter);
+
+                // Locate the EditText in listview_main.xml
+                editsearch = (EditText) findViewById(R.id.search);
+
+                // Capture Text in EditText
+                editsearch.addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void afterTextChanged(Editable arg0) {
+                        // TODO Auto-generated method stub
+                        String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
+                        ladapter.filter(text);
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence arg0, int arg1,
+                                                  int arg2, int arg3) {
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                              int arg3) {
+                        // TODO Auto-generated method stub
+                    }
+                });
             }
         });
     }
@@ -578,10 +644,10 @@ public class MainActivity extends Activity {
 
 
                 //collapse all expandable groups.
-                if (eAdapter != null) {
-                    for (int i = 0; i < eAdapter.groups.size(); i++)
-                        expandableListView.collapseGroup(i);
-                }
+//                if (eAdapter != null) {
+//                    for (int i = 0; i < eAdapter.groups.size(); i++)
+//                        expandableListView.collapseGroup(i);
+//                }
 
                 return true;
 
