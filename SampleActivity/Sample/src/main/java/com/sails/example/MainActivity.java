@@ -1,11 +1,8 @@
 package com.sails.example;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.sails.engine.Beacon;
@@ -26,26 +23,19 @@ import android.os.Vibrator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Service;
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -58,41 +48,32 @@ public class MainActivity extends Activity {
     ImageView zoomin;
     ImageView zoomout;
     ImageView lockcenter;
-//    Button endRouteButton;
-//    Button pinMarkerButton;
     TextView distanceView;
     TextView currentFloorDistanceView;
     TextView msgView;
-    SlidingMenu menu;
+    SlidingMenu slidingMenu;
     ActionBar actionBar;
-//    ExpandableListView expandableListView;
-    ExpandableAdapter eAdapter;
     Vibrator mVibrator;
     Spinner floorList;
     ArrayAdapter<String> adapter;
     byte zoomSav = 0;
 
-    // Test script for search
+    // Variable for search function
     ListView list;
     ListViewAdapter ladapter;
     EditText editsearch;
-    String[] rank;
-    String[] country;
-    String[] population;
-    ArrayList<WorldPopulation> arraylist = new ArrayList<WorldPopulation>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        menu = new SlidingMenu(this);
-        menu.setMode(SlidingMenu.LEFT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-        menu.setFadeDegree(0.0f);
-        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-        menu.setMenu(R.layout.expantablelist);
+        slidingMenu = new SlidingMenu(this);
+        slidingMenu.setMode(SlidingMenu.LEFT);
+        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+        slidingMenu.setFadeDegree(0.0f);
+        slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        slidingMenu.setMenu(R.layout.search_view);
         mVibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
         actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(true);
@@ -101,8 +82,6 @@ public class MainActivity extends Activity {
         zoomin = (ImageView) findViewById(R.id.zoomin);
         zoomout = (ImageView) findViewById(R.id.zoomout);
         lockcenter = (ImageView) findViewById(R.id.lockcenter);
-//        endRouteButton = (Button) findViewById(R.id.stopRoute);
-//        pinMarkerButton = (Button) findViewById(R.id.pinMarker);
         distanceView = (TextView) findViewById(R.id.distanceView);
         distanceView.setVisibility(View.INVISIBLE);
         currentFloorDistanceView = (TextView) findViewById(R.id.currentFloorDistanceView);
@@ -116,12 +95,6 @@ public class MainActivity extends Activity {
         zoomin.setOnClickListener(controlListener);
         zoomout.setOnClickListener(controlListener);
         lockcenter.setOnClickListener(controlListener);
-//        endRouteButton.setOnClickListener(controlListener);
-//        endRouteButton.setVisibility(View.INVISIBLE);
-//        pinMarkerButton.setOnClickListener(controlListener);
-//        pinMarkerButton.setVisibility(View.VISIBLE);
-//        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-//        expandableListView.setOnChildClickListener(childClickListener);
 
         LocationRegion.FONT_LANGUAGE = LocationRegion.NORMAL;
 
@@ -243,12 +216,13 @@ public class MainActivity extends Activity {
 
         //load first floor map in package.
         mSailsMapView.loadFloorMap(mSails.getFloorNameList().get(0));
-        actionBar.setTitle("Map POIs");
+        actionBar.setTitle("Search");
 
         //Auto Adjust suitable map zoom level and position to best view position.
         mSailsMapView.autoSetMapZoomAndView();
 
         //set location region click call back.
+        // TODO: handleOnRegionClick
         mSailsMapView.setOnRegionClickListener(new SAILSMapView.OnRegionClickListener() {
             @Override
             public void onClick(List<LocationRegion> locationRegions) {
@@ -284,6 +258,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        // TODO: not sure how this works, double check later
         mSailsMapView.getPinMarkerManager().setOnPinMarkerClickCallback(new PinMarkerManager.OnPinMarkerClickCallback() {
             @Override
             public void OnClick(MarkerManager.LocationRegionMarker locationRegionMarker) {
@@ -293,6 +268,7 @@ public class MainActivity extends Activity {
         });
 
         //set location region long click call back.
+        // TODO: handle regionLongClick
         mSailsMapView.setOnRegionLongClickListener(new SAILSMapView.OnRegionLongClickListener() {
             @Override
             public void onLongClick(List<LocationRegion> locationRegions) {
@@ -339,6 +315,7 @@ public class MainActivity extends Activity {
         });
 
         //design some action in mode change call back.
+        // TODO: Need further check whether this is needed
         mSailsMapView.setOnModeChangedListener(new SAILSMapView.OnModeChangedListener() {
             @Override
             public void onModeChanged(int mode) {
@@ -467,29 +444,6 @@ public class MainActivity extends Activity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //1st stage groups
-//                List<Map<String, String>> groups = new ArrayList<Map<String, String>>();
-//                //2nd stage groups
-//                List<List<Map<String, LocationRegion>>> childs = new ArrayList<List<Map<String, LocationRegion>>>();
-//                for (String mS : mSails.getFloorNameList()) {
-//                    Map<String, String> group_item = new HashMap<String, String>();
-//                    group_item.put("group", mSails.getFloorDescription(mS));
-//                    groups.add(group_item);
-//
-//                    List<Map<String, LocationRegion>> child_items = new ArrayList<Map<String, LocationRegion>>();
-//                    for (LocationRegion mlr : mSails.getLocationRegionList(mS)) {
-//                        if (mlr.getName() == null || mlr.getName().length() == 0)
-//                            continue;
-//
-//                        Map<String, LocationRegion> childData = new HashMap<String, LocationRegion>();
-//                        childData.put("child", mlr);
-//                        child_items.add(childData);
-//                    }
-//                    childs.add(child_items);
-//                }
-//                eAdapter = new ExpandableAdapter(getBaseContext(), groups, childs);
-//                expandableListView.setAdapter(eAdapter);
-                /* TODO: Change this to init the new list view with search function */
                 ArrayList<MapItem> items = new ArrayList<MapItem>();
                 for (String floorName : mSails.getFloorNameList()) {
                     String floorDescription = mSails.getFloorDescription(floorName);
@@ -500,30 +454,13 @@ public class MainActivity extends Activity {
                         items.add(item);
                     }
                 }
-                rank = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
-
-                country = new String[] { "China", "India", "United States",
-                        "Indonesia", "Brazil", "Pakistan", "Nigeria", "Bangladesh",
-                        "Russia", "Japan" };
-
-                population = new String[] { "1,354,040,000", "1,210,193,422",
-                        "315,761,000", "237,641,326", "193,946,886", "182,912,000",
-                        "170,901,000", "152,518,015", "143,369,806", "127,360,000" };
 
                 // Locate the ListView in listview_main.xml
                 list = (ListView) findViewById(R.id.listview);
                 list.setOnItemClickListener(listClickListener);
 
-                for (int i = 0; i < rank.length; i++)
-                {
-                    WorldPopulation wp = new WorldPopulation(rank[i], country[i],
-                            population[i]);
-                    // Binds all strings into an array
-                    arraylist.add(wp);
-                }
-
                 // Pass results to ListViewAdapter Class
-                ladapter = new ListViewAdapter(MainActivity.this, arraylist, items);
+                ladapter = new ListViewAdapter(MainActivity.this, items);
 
                 // Binds the Adapter to the ListView
                 list.setAdapter(ladapter);
@@ -535,22 +472,17 @@ public class MainActivity extends Activity {
                 editsearch.addTextChangedListener(new TextWatcher() {
 
                     @Override
-                    public void afterTextChanged(Editable arg0) {
-                        // TODO Auto-generated method stub
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
                         String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
                         ladapter.filter(text);
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence arg0, int arg1,
-                                                  int arg2, int arg3) {
-                        // TODO Auto-generated method stub
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-                                              int arg3) {
-                        // TODO Auto-generated method stub
                     }
                 });
             }
@@ -569,27 +501,10 @@ public class MainActivity extends Activity {
             }
             GeoPoint poi = new GeoPoint(lr.getCenterLatitude(), lr.getCenterLongitude());
             mSailsMapView.setAnimationMoveMapTo(poi);
-            menu.showContent();
+            slidingMenu.showContent();
+            // TODO: add highlight on the result place
         }
     };
-
-//    ExpandableListView.OnChildClickListener childClickListener = new ExpandableListView.OnChildClickListener() {
-//        @Override
-//        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//
-//            LocationRegion lr = eAdapter.childs.get(groupPosition).get(childPosition).get("child");
-//
-//            if (!lr.getFloorName().equals(mSailsMapView.getCurrentBrowseFloorName())) {
-//                mSailsMapView.loadFloorMap(lr.getFloorName());
-//                mSailsMapView.getMapViewPosition().setZoomLevel((byte) 19);
-//                Toast.makeText(getBaseContext(), mSails.getFloorDescription(lr.getFloorName()), Toast.LENGTH_SHORT).show();
-//            }
-//            GeoPoint poi = new GeoPoint(lr.getCenterLatitude(), lr.getCenterLongitude());
-//            mSailsMapView.setAnimationMoveMapTo(poi);
-//            menu.showContent();
-//            return false;
-//        }
-//    };
 
     View.OnClickListener controlListener = new View.OnClickListener() {
         @Override
@@ -630,28 +545,11 @@ public class MainActivity extends Activity {
                     mSailsMapView.setMode(mSailsMapView.getMode() | SAILSMapView.LOCATION_CENTER_LOCK);
                 }
             }
-//            else if (v == endRouteButton) {
-//                endRouteButton.setVisibility(View.INVISIBLE);
-//                distanceView.setVisibility(View.INVISIBLE);
-//                currentFloorDistanceView.setVisibility(View.INVISIBLE);
-//                msgView.setVisibility(View.INVISIBLE);
-//                //end route.
-//                mSailsMapView.getRoutingManager().disableHandler();
-//            } else if (v == pinMarkerButton) {
-//                Toast.makeText(getApplication(), "Please Touch Map and Set PinMarker.", Toast.LENGTH_SHORT).show();
-//                mSailsMapView.getPinMarkerManager().setOnPinMarkerGenerateCallback(Marker.boundCenterBottom(getResources().getDrawable(R.drawable.parking_target)), new PinMarkerManager.OnPinMarkerGenerateCallback() {
-//                    @Override
-//                    public void OnGenerate(MarkerManager.LocationRegionMarker locationRegionMarker) {
-//                        Toast.makeText(getApplication(), "One PinMarker Generated.", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//            }
         }
     };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -664,47 +562,12 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
-                if (menu.isMenuShowing())
-                    menu.showContent();
+                if (slidingMenu.isMenuShowing())
+                    slidingMenu.showContent();
                 else
-                    menu.showMenu();
-
-
-                //collapse all expandable groups.
-//                if (eAdapter != null) {
-//                    for (int i = 0; i < eAdapter.groups.size(); i++)
-//                        expandableListView.collapseGroup(i);
-//                }
+                    slidingMenu.showMenu();
 
                 return true;
-
-//            case R.id.start_location_engine:
-//                if (!mSails.isLocationEngineStarted()) {
-//                    mSails.startLocatingEngine();
-//                    mSailsMapView.setLocatorMarkerVisible(true);
-//                    Toast.makeText(this, "Start Location Engine", Toast.LENGTH_SHORT).show();
-//                    mSailsMapView.setMode(SAILSMapView.LOCATION_CENTER_LOCK | SAILSMapView.FOLLOW_PHONE_HEADING);
-//                    lockcenter.setVisibility(View.VISIBLE);
-//                    endRouteButton.setVisibility(View.INVISIBLE);
-//                }
-//
-//                return true;
-//
-//            case R.id.stop_location_engine:
-//                if (mSails.isLocationEngineStarted()) {
-//                    mSails.stopLocatingEngine();
-//                    mSailsMapView.setLocatorMarkerVisible(false);
-//                    mSailsMapView.setMode(SAILSMapView.GENERAL);
-//                    mSailsMapView.getRoutingManager().disableHandler();
-//                    pinMarkerButton.setVisibility(View.VISIBLE);
-//                    endRouteButton.setVisibility(View.INVISIBLE);
-//                    distanceView.setVisibility(View.INVISIBLE);
-//                    currentFloorDistanceView.setVisibility(View.INVISIBLE);
-//                    msgView.setVisibility(View.INVISIBLE);
-//                    Toast.makeText(this, "Stop Location Engine", Toast.LENGTH_SHORT).show();
-//                }
-//                return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
