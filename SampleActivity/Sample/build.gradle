@@ -1,17 +1,17 @@
 apply plugin: 'android'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 21
     buildToolsVersion '20.0.0'
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 19
+        targetSdkVersion 21
         versionCode 1
         versionName '1.0'
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
@@ -22,4 +22,5 @@ android {
 dependencies {
     compile project(':SlidingMenu')
     compile files('libs/SAILS_SDK_V1.73_Published.jar')
+    compile 'com.android.support:appcompat-v7:21.0.0'
 }

@@ -2,6 +2,27 @@
 <items version="2" >
 
     <item
+        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
+        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-e06e6d975df24407614be5b4d99f10aed48c4131.jar" />
+    </item>
+    <item
+        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
+        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-53f6c0e946a0a6cdf5afc067c48c50d968c547a1.jar" />
+    </item>
+    <item
+        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/SampleActivity/SlidingMenu/unspecified/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="6d59f19b5d6f3b22899e10546fd2c889334509a0">
+        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-1bf8808191a87cc6e0b3bc159caa479f986f41ac.jar" />
+    </item>
+    <item
         jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/libs/SAILS_SDK_V1.73_Published.jar"
         jumboMode="false"
         revision="20.0.0"
@@ -9,18 +30,18 @@
         <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/SAILS_SDK_V1.73_Published-18524634433085176bb48474b90e8eef9e0c42da.jar" />
     </item>
     <item
-        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/SampleActivity/SlidingMenu/unspecified/libs/android-support-v4.jar"
+        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="48c94ae70fa65718b382098237806a5909bb096e">
-        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/android-support-v4-1220bb997299c802e34dc845017714d7ae2db10a.jar" />
+        sha1="95fd37732ec852e99f07eeb516a3650172f1d136">
+        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-565a0d91466d9b03712e0fdc7ee7913f39b0f0eb.jar" />
     </item>
     <item
-        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/SampleActivity/SlidingMenu/unspecified/classes.jar"
+        jar="/Users/wedrago/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="7f30db940ee63cedae4a4c13ad6efb41c3799a6d">
-        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-1bf8808191a87cc6e0b3bc159caa479f986f41ac.jar" />
+        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
+        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-613b105ea64b36292c1fa10aaf9788bc21b513d8.jar" />
     </item>
 
 </items>
