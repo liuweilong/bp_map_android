@@ -4,9 +4,13 @@
     android:layout_height="match_parent"
     tools:context="com.sails.example.MainActivity">
 
+    <include android:id="@+id/app_bar"
+        layout="@layout/app_bar"></include>
+
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_below="@+id/app_bar"
         android:id="@+id/SAILSMap" />
 
     <RelativeLayout
@@ -18,8 +22,11 @@
             android:layout_height="57dp"
             android:id="@+id/zoomin"
             android:src="@drawable/zoominb"
-            android:layout_above="@+id/zoomout"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:visibility="invisible"/>
 
         <ImageView
             android:layout_width="57dp"
@@ -27,113 +34,65 @@
             android:id="@+id/zoomout"
             android:baselineAlignBottom="false"
             android:src="@drawable/zoomoutb"
-            android:layout_alignTop="@+id/lockcenter"
-            android:layout_alignParentRight="true" />
-
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/lockcenter"
-            android:src="@drawable/center1"
-            android:layout_above="@+id/imageView"
-            android:layout_alignParentLeft="true" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:src="@drawable/maplogo"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:visibility="invisible" />
+            android:layout_below="@+id/zoomin"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"/>
 
         <Spinner
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
-
-        <!--<Button-->
-            <!--android:id="@+id/stopRoute"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Stop Route"-->
-            <!--android:textStyle="bold"-->
-            <!--android:layout_below="@+id/spinner"-->
-            <!--android:layout_alignRight="@+id/zoomin"-->
-            <!--android:layout_alignEnd="@+id/zoomin" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/pinMarker"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Place a Pin Marker"-->
-            <!--android:textStyle="bold"-->
-            <!--android:layout_below="@+id/spinner"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true" />-->
-
-        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/usage"
-            android:layout_above="@+id/imageView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
-            android:textSize="10dp"
-            android:singleLine="false"
-            android:textColor="@android:color/white"
-            android:background="@android:color/black"
-            android:visibility="invisible"
-            android:text="@string/usage"
-            android:padding="5dp" />
+            android:background="?android:selectableItemBackground"
+            android:layout_height="57dp"
+            android:id="@+id/spinner"
+            android:layout_alignParentBottom="true"
+            android:alpha="1"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/distanceView"
-            android:gravity="right"
-            android:textColor="@android:color/holo_blue_light"
-            android:padding="5dp"
-            android:textStyle="bold"
-            android:background="#80000000"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentBottom="false" />
+        <!--<TextView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:id="@+id/distanceView"-->
+            <!--android:gravity="right"-->
+            <!--android:textColor="@android:color/holo_blue_light"-->
+            <!--android:padding="5dp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:background="#80000000"-->
+            <!--android:layout_alignParentStart="false"-->
+            <!--android:layout_alignParentTop="false"-->
+            <!--android:layout_alignParentBottom="false" />-->
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/currentFloorDistanceView"
-            android:layout_below="@+id/distanceView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="right"
-            android:textColor="@android:color/holo_orange_light"
-            android:padding="5dp"
-            android:textStyle="bold"
-            android:background="#80000000" />
+        <!--<TextView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:id="@+id/currentFloorDistanceView"-->
+            <!--android:layout_below="@+id/distanceView"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:gravity="right"-->
+            <!--android:textColor="@android:color/holo_orange_light"-->
+            <!--android:padding="5dp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:background="#80000000" />-->
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/msgView"
-            android:layout_below="@+id/currentFloorDistanceView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="left"
-            android:textColor="@android:color/holo_green_light"
-            android:padding="5dp"
-            android:textStyle="bold|italic"
-            android:background="#80000000" />
+        <!--<TextView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:id="@+id/msgView"-->
+            <!--android:layout_below="@+id/currentFloorDistanceView"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:gravity="left"-->
+            <!--android:textColor="@android:color/holo_green_light"-->
+            <!--android:padding="5dp"-->
+            <!--android:textStyle="bold|italic"-->
+            <!--android:background="#80000000" />-->
 
     </RelativeLayout>
 
