@@ -2,30 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:theme="@style/AppTheme.SearchListItem"
     >
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/mapItem"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:theme="@style/mainTitle"
+        android:layout_margin="0dp" />
+
+    <TextView
+        android:id="@+id/level"
+        android:text="Level:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mapItem"
+        android:theme="@style/subTitle"
+        android:layout_margin="0dp" />
+
+    <TextView
+        android:id="@+id/floorName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:theme="@style/AppTheme.SearchListItem"
-        >
-
-        <TextView
-            android:id="@+id/mapItem"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:theme="@style/AppTheme.BaseTheme.SearchListItem.mainTitle"
-            android:layout_margin="0dp" />
-
-
-        <TextView
-            android:id="@+id/floorName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/mapItem"
-            android:theme="@style/AppTheme.BaseTheme.SearchListItem.subTitle"
-            android:layout_margin="0dp" />
-    </LinearLayout>
+        android:layout_toEndOf="@+id/level"
+        android:layout_below="@+id/mapItem"
+        android:theme="@style/subTitle" />
 
 </RelativeLayout>

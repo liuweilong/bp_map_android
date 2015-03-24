@@ -40,23 +40,12 @@
             android:layout_marginTop="10dp"
             android:visibility="invisible"/>
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:background="@color/primary_dark_green"
-            android:layout_height="57dp"
-            android:id="@+id/spinner"
-            android:layout_alignParentBottom="true"
-            android:alpha="1"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="15dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="15dp" />
     </RelativeLayout>
 
     <ListView
         android:id="@+id/listview"
+        android:layout_below="@+id/app_bar"
         android:background="@color/primary_white"
-        android:layout_below="@+id/search_bar"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:textFilterEnabled="false"

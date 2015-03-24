@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BP</string>
+    <string name="app_name">bp</string>
     <string name="action_settings">Settings</string>
     <string name="map_item_label">Name: </string>
     <string name="floor_name_label">Floor: </string>

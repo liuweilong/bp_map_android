@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/search"
+        android:title="Search"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+
+</menu><!-- From: file:/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/src/main/res/menu/menu_main.xml -->

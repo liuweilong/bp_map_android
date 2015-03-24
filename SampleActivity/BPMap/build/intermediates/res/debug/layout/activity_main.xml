@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sails.example.MainActivity">
+
+    <include android:id="@+id/app_bar"
+        layout="@layout/app_bar"></include>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/app_bar"
+        android:id="@+id/SAILSMap" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ImageView
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:id="@+id/zoomin"
+            android:src="@drawable/zoominb"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:id="@+id/zoomout"
+            android:baselineAlignBottom="false"
+            android:src="@drawable/zoomoutb"
+            android:layout_below="@+id/zoomin"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:background="@color/primary_dark_green"
+            android:layout_height="57dp"
+            android:id="@+id/spinner"
+            android:layout_alignParentBottom="true"
+            android:alpha="1"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:background="@color/primary_white"
+        android:layout_below="@+id/search_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textFilterEnabled="false"
+        android:divider="@color/light_grey"/>
+
+</RelativeLayout>
+<!-- From: file:/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/src/main/res/layout/activity_main.xml -->

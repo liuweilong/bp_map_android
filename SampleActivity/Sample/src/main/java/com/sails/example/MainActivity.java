@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
         zoomin = (ImageView) findViewById(R.id.zoomin);
         zoomout = (ImageView) findViewById(R.id.zoomout);
 
-        floorList = (Spinner) findViewById(R.id.spinner);
+        floorList = (Spinner) findViewById(R.id.spinner_nav);
 
         zoomin.setOnClickListener(controlListener);
         zoomout.setOnClickListener(controlListener);
@@ -161,8 +161,8 @@ public class MainActivity extends ActionBarActivity {
             public void run() {
                 //please change token and building id to your own building project in cloud.
                 // 29008b47625243bca00ffdd4e52af10f 5508f92fd98797a814001afc
-                // 96af8361581f43a1b7a27ba618aa6695 55082d4ad98797a814001ace
-                mSails.loadCloudBuilding("29008b47625243bca00ffdd4e52af10f", "5508f92fd98797a814001afc", new SAILS.OnFinishCallback() {
+                // 96af8361581f43a1b7a27ba618aa6695 5511570fd98797a814001c1d
+                mSails.loadCloudBuilding("96af8361581f43a1b7a27ba618aa6695", "5511570fd98797a814001c1d", new SAILS.OnFinishCallback() {
                     @Override
                     public void onSuccess(final String response) {
                         runOnUiThread(new Runnable() {
@@ -212,33 +212,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(List<LocationRegion> locationRegions) {
                 LocationRegion lr = locationRegions.get(0);
                 //begin to routing
-                if (mSails.isLocationEngineStarted()) {
-                    //set routing start point to current user location.
-                    mSailsMapView.getRoutingManager().setStartRegion(PathRoutingManager.MY_LOCATION);
-
-                    //set routing end point marker icon.
-//                    mSailsMapView.getRoutingManager().setTargetMakerDrawable(Marker.boundCenterBottom(getResources().getDrawable(R.drawable.destination)));
-
-                    //set routing path's color.
-                    mSailsMapView.getRoutingManager().getPathPaint().setColor(0xFF35b3e5);
-
-//                    endRouteButton.setVisibility(View.VISIBLE);
-//                    currentFloorDistanceView.setVisibility(View.VISIBLE);
-//                    msgView.setVisibility(View.VISIBLE);
-
-                } else {
-//                    mSailsMapView.getRoutingManager().setTargetMakerDrawable(Marker.boundCenterBottom(getResources().getDrawable(R.drawable.map_destination)));
-                    mSailsMapView.getRoutingManager().getPathPaint().setColor(0xFF85b038);
-//                    if (mSailsMapView.getRoutingManager().getStartRegion() != null)
-//                        endRouteButton.setVisibility(View.VISIBLE);
-                }
-
-                //set routing end point location.
-                mSailsMapView.getRoutingManager().setTargetRegion(lr);
-
-                //begin to route.
-//                if (mSailsMapView.getRoutingManager().enableHandler())
-//                    distanceView.setVisibility(View.VISIBLE);
+                mSailsMapView.getMarkerManager().setLocationRegionMarker(lr, getResources().getDrawable(R.drawable.map_destination));
             }
         });
 
@@ -297,9 +271,10 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        // Setup spinner
         // TODO: They style of choosing the floor need to be updated
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mSails.getFloorDescList());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, mSails.getFloorDescList());
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         floorList.setAdapter(adapter);
         floorList.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             @Override
@@ -352,6 +327,7 @@ public class MainActivity extends ActionBarActivity {
 //            searchView.clearFocus();
             searchView.onActionViewCollapsed();
             list.setVisibility(View.INVISIBLE);
+            floorList.setVisibility(View.VISIBLE);
 
             ListViewAdapter.ViewHolder viewHolder = (ListViewAdapter.ViewHolder)view.getTag();
             LocationRegion lr = viewHolder.lr;
@@ -362,6 +338,7 @@ public class MainActivity extends ActionBarActivity {
                 Toast.makeText(getBaseContext(), mSails.getFloorDescription(lr.getFloorName()), Toast.LENGTH_SHORT).show();
             }
             GeoPoint poi = new GeoPoint(lr.getCenterLatitude(), lr.getCenterLongitude());
+            mSailsMapView.setAnimationToZoom((byte) 14);
             mSailsMapView.setAnimationMoveMapTo(poi);
             // TODO: add highlight on the result place
         }
@@ -383,45 +360,51 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-//        restoreActionBar();
+
+        // Setup search
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-
-            SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
             searchViewItem = menu.findItem(R.id.search);
-            searchView = (SearchView) searchViewItem.getActionView();
+            if (searchViewItem != null) {
+                SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+                searchView = (SearchView) searchViewItem.getActionView();
+                if (searchView != null) {
+                    searchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
+                    searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+                        @Override
+                        public boolean onClose() {
+                            list.setVisibility(View.GONE);
+                            floorList.setVisibility(View.VISIBLE);
+                            return false;
+                        }
+                    });
 
-            searchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
+                    searchView.setOnSearchClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            list.setVisibility(View.VISIBLE);
+                            floorList.setVisibility(View.GONE);
+                        }
+                    });
 
-            searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-                @Override
-                public boolean onClose() {
-                    list.setVisibility(View.GONE);
-                    return false;
+                    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                        @Override
+                        public boolean onQueryTextSubmit(String s) {
+                            searchView.clearFocus();
+                            if (s != null && !s.equals("")) {
+                                ladapter.filter(s);
+                            }
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onQueryTextChange(String query) {
+                            ladapter.filter(query);
+                            return true;
+                        }
+
+                    });
                 }
-            });
-
-            searchView.setOnSearchClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    list.setVisibility(View.VISIBLE);
-                }
-            });
-
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-                @Override
-                public boolean onQueryTextSubmit(String s) {
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String query) {
-                    ladapter.filter(query);
-                    return true;
-                }
-
-            });
-
+            }
         }
         return true;
     }

@@ -1,31 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="AppTheme.BaseTheme">
+    <style name="AppTheme" parent="BaseTheme">
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="AppTheme.BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimary">@color/primary_dark_green</item>
         <item name="android:textColorPrimary">@color/primary_white</item>
         <item name="android:colorPrimaryDark">@color/secondary_dark_green</item>
+        <item name="android:navigationBarColor">@color/secondary_dark_green</item>
+        <item name="android:colorAccent">@color/primary_white</item>
     </style>
 
-    <style name="AppTheme.SearchListItem" parent="AppTheme.BaseTheme">
-        <item name="android:padding">3dp</item>
-        <item name="android:layout_marginTop">3dp</item>
+    <style name="ActionBarTheme" parent="BaseTheme">
+        <item name="android:colorAccent">@color/primary_white</item>
+    </style>
+
+    <style name="AppTheme.SearchListItem" parent="BaseTheme">
+        <item name="android:padding">5dp</item>
         <item name="android:elevation">1dp</item>
         <item name="android:background">@color/primary_white</item>
     </style>
 
-    <style name="AppTheme.BaseTheme.SearchListItem.mainTitle" parent="AppTheme.BaseTheme">
+    <style name="mainTitle" parent="BaseTheme">
         <item name="android:textColor">@color/primary_black</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">18dp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="AppTheme.BaseTheme.SearchListItem.subTitle" parent="AppTheme.BaseTheme">
+    <style name="subTitle" parent="BaseTheme">
         <item name="android:textColor">@color/secondary_black</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">12dp</item>
     </style>
 
 </resources>

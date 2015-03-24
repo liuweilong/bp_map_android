@@ -16,13 +16,6 @@
         <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-53f6c0e946a0a6cdf5afc067c48c50d968c547a1.jar" />
     </item>
     <item
-        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/SampleActivity/SlidingMenu/unspecified/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="6d59f19b5d6f3b22899e10546fd2c889334509a0">
-        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-1bf8808191a87cc6e0b3bc159caa479f986f41ac.jar" />
-    </item>
-    <item
         jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/libs/SAILS_SDK_V1.73_Published.jar"
         jumboMode="false"
         revision="20.0.0"
