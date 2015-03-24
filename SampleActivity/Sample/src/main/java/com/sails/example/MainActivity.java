@@ -13,6 +13,7 @@ import com.sails.engine.PathRoutingManager;
 import com.sails.engine.PinMarkerManager;
 import com.sails.engine.SAILSMapView;
 import com.sails.engine.core.model.GeoPoint;
+import com.sails.engine.overlay.Marker;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -211,8 +212,6 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(List<LocationRegion> locationRegions) {
                 LocationRegion lr = locationRegions.get(0);
-                //begin to routing
-                mSailsMapView.getMarkerManager().setLocationRegionMarker(lr, getResources().getDrawable(R.drawable.map_destination));
             }
         });
 
@@ -220,6 +219,7 @@ public class MainActivity extends ActionBarActivity {
         mSailsMapView.getPinMarkerManager().setOnPinMarkerClickCallback(new PinMarkerManager.OnPinMarkerClickCallback() {
             @Override
             public void OnClick(MarkerManager.LocationRegionMarker locationRegionMarker) {
+                mSailsMapView.getMarkerManager().clear();
                 Toast.makeText(getApplication(), "(" + Double.toString(locationRegionMarker.locationRegion.getCenterLatitude()) + "," +
                         Double.toString(locationRegionMarker.locationRegion.getCenterLongitude()) + ")", Toast.LENGTH_SHORT).show();
             }
@@ -235,7 +235,7 @@ public class MainActivity extends ActionBarActivity {
 
                 mSailsMapView.getMarkerManager().clear();
                 mSailsMapView.getRoutingManager().setStartRegion(locationRegions.get(0));
-//                mSailsMapView.getMarkerManager().setLocationRegionMarker(locationRegions.get(0), Marker.boundCenter(getResources().getDrawable(R.drawable.start_point)));
+                mSailsMapView.getMarkerManager().setLocationRegionMarker(locationRegions.get(0), Marker.boundCenter(getResources().getDrawable(R.drawable.map_destination)));
             }
         });
 
@@ -340,6 +340,8 @@ public class MainActivity extends ActionBarActivity {
             GeoPoint poi = new GeoPoint(lr.getCenterLatitude(), lr.getCenterLongitude());
             mSailsMapView.setAnimationToZoom((byte) 14);
             mSailsMapView.setAnimationMoveMapTo(poi);
+            mSailsMapView.getMarkerManager().clear();
+            mSailsMapView.getMarkerManager().setLocationRegionMarker(lr, Marker.boundCenterBottom(getResources().getDrawable(R.drawable.map_destination)));
             // TODO: add highlight on the result place
         }
     };
