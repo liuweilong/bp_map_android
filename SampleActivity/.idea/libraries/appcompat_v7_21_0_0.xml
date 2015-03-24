@@ -4,7 +4,7 @@
       <root url="jar://$PROJECT_DIR$/Sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/BPMap/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res" />
+      <root url="file://$PROJECT_DIR$/Sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/res" />
       <root url="jar://$PROJECT_DIR$/Sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
