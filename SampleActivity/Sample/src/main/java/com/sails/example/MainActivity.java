@@ -17,7 +17,10 @@ import com.sails.engine.overlay.Marker;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -27,6 +30,7 @@ import android.app.Service;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -50,16 +54,15 @@ public class MainActivity extends ActionBarActivity {
     static SAILSMapView mSailsMapView;
     ImageView zoomin;
     ImageView zoomout;
-//    SlidingMenu slidingMenu;
     Spinner floorList;
     ArrayAdapter<String> adapter;
     byte zoomSav = 0;
     byte zooMlevel = 18;
 
     // Variable for search function
-    ListView list;
-    ListViewAdapter ladapter;
-    EditText editsearch;
+//    ListView list;
+//    ListViewAdapter ladapter;
+//    EditText editsearch;
 
     // Toolbar
     private Toolbar toolbar;
@@ -72,12 +75,6 @@ public class MainActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//        slidingMenu = new SlidingMenu(this);
-//        slidingMenu.setMode(SlidingMenu.LEFT);
-//        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-//        slidingMenu.setFadeDegree(0.0f);
-//        slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-//        slidingMenu.setMenu(R.layout.search_view);
 
         zoomin = (ImageView) findViewById(R.id.zoomin);
         zoomout = (ImageView) findViewById(R.id.zoomout);
@@ -169,7 +166,7 @@ public class MainActivity extends ActionBarActivity {
                 //please change token and building id to your own building project in cloud.
                 // 29008b47625243bca00ffdd4e52af10f 5508f92fd98797a814001afc
                 // 96af8361581f43a1b7a27ba618aa6695 55082d4ad98797a814001ace
-                mSails.loadCloudBuilding("96af8361581f43a1b7a27ba618aa6695", "55082d4ad98797a814001ace", new SAILS.OnFinishCallback() {
+                mSails.loadCloudBuilding("29008b47625243bca00ffdd4e52af10f", "5508f92fd98797a814001afc", new SAILS.OnFinishCallback() {
                     @Override
                     public void onSuccess(final String response) {
                         runOnUiThread(new Runnable() {
@@ -178,8 +175,7 @@ public class MainActivity extends ActionBarActivity {
                                 Toast t = Toast.makeText(getBaseContext(), "Map loaded", Toast.LENGTH_SHORT);
                                 t.show();
                                 mapViewInitial();
-//                                routingInitial();
-//                                slidingMenuInitial();
+                                searchInitial();
                             }
                         });
 
@@ -322,22 +318,24 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-//    void slidingMenuInitial() {
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                ArrayList<MapItem> items = new ArrayList<MapItem>();
-//                for (String floorName : mSails.getFloorNameList()) {
-//                    String floorDescription = mSails.getFloorDescription(floorName);
-//                    for (LocationRegion lr : mSails.getLocationRegionList(floorName)) {
-//                        if (lr.getName() == null || lr.getName().length() == 0)
-//                            continue;
-//                        MapItem item = new MapItem(lr.getName(), floorName, floorDescription, lr);
-//                        items.add(item);
-//                    }
-//                }
-//
-//                // Locate the ListView in listview_main.xml
+    void searchInitial() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<MapItem> items = new ArrayList<MapItem>();
+                for (String floorName : mSails.getFloorNameList()) {
+                    String floorDescription = mSails.getFloorDescription(floorName);
+                    for (LocationRegion lr : mSails.getLocationRegionList(floorName)) {
+                        if (lr.getName() == null || lr.getName().length() == 0)
+                            continue;
+                        MapItem item = new MapItem(lr.getName(), floorName, floorDescription, lr);
+                        items.add(item);
+                    }
+                }
+
+                SearchData.setMapItems(items);
+
+                // Locate the ListView in listview_main.xml
 //                list = (ListView) findViewById(R.id.listview);
 //                list.setOnItemClickListener(listClickListener);
 //
@@ -367,26 +365,25 @@ public class MainActivity extends ActionBarActivity {
 //                        ladapter.filter(text);
 //                    }
 //                });
-//            }
-//        });
-//    }
-//    ListView.OnItemClickListener listClickListener = new ListView.OnItemClickListener() {
-//        @Override
-//        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//            ListViewAdapter.ViewHolder viewHolder = (ListViewAdapter.ViewHolder)view.getTag();
-//            LocationRegion lr = viewHolder.lr;
-//
-//            if (!lr.getFloorName().equals(mSailsMapView.getCurrentBrowseFloorName())) {
-//                mSailsMapView.loadFloorMap(lr.getFloorName());
-//                mSailsMapView.getMapViewPosition().setZoomLevel((byte) 19);
-//                Toast.makeText(getBaseContext(), mSails.getFloorDescription(lr.getFloorName()), Toast.LENGTH_SHORT).show();
-//            }
-//            GeoPoint poi = new GeoPoint(lr.getCenterLatitude(), lr.getCenterLongitude());
-//            mSailsMapView.setAnimationMoveMapTo(poi);
-////            slidingMenu.showContent();
-//            // TODO: add highlight on the result place
-//        }
-//    };
+            }
+        });
+    }
+    ListView.OnItemClickListener listClickListener = new ListView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            ListViewAdapter.ViewHolder viewHolder = (ListViewAdapter.ViewHolder)view.getTag();
+            LocationRegion lr = viewHolder.lr;
+
+            if (!lr.getFloorName().equals(mSailsMapView.getCurrentBrowseFloorName())) {
+                mSailsMapView.loadFloorMap(lr.getFloorName());
+                mSailsMapView.getMapViewPosition().setZoomLevel((byte) 19);
+                Toast.makeText(getBaseContext(), mSails.getFloorDescription(lr.getFloorName()), Toast.LENGTH_SHORT).show();
+            }
+            GeoPoint poi = new GeoPoint(lr.getCenterLatitude(), lr.getCenterLongitude());
+            mSailsMapView.setAnimationMoveMapTo(poi);
+            // TODO: add highlight on the result place
+        }
+    };
 
     View.OnClickListener controlListener = new View.OnClickListener() {
         @Override
@@ -397,35 +394,6 @@ public class MainActivity extends ActionBarActivity {
             } else if (v == zoomout) {
                 //set map zoomout function.
                 mSailsMapView.zoomOut();
-//            } else if (v == lockcenter) {
-//                if (!mSails.isLocationFix() || !mSails.isLocationEngineStarted()) {
-//                    Toast t = Toast.makeText(getBaseContext(), "Location Not Found or Location Engine Turn Off.", Toast.LENGTH_SHORT);
-//                    t.show();
-//                    return;
-//                }
-//                if (!mSailsMapView.isCenterLock() && !mSailsMapView.isInLocationFloor()) {
-//                    //set the map that currently location engine recognize.
-//                    mSailsMapView.loadCurrentLocationFloorMap();
-//
-//                    Toast t = Toast.makeText(getBaseContext(), "Go Back to Locating Floor First.", Toast.LENGTH_SHORT);
-//                    t.show();
-//                    return;
-//                }
-//                //set map mode.
-//                //FOLLOW_PHONE_HEADING: the map follows the phone's heading.
-//                //LOCATION_CENTER_LOCK: the map locks the current location in the center of map.
-//                //ALWAYS_LOCK_MAP: the map will keep the mode even user moves the map.
-//                if (mSailsMapView.isCenterLock()) {
-//                    if ((mSailsMapView.getMode() & SAILSMapView.FOLLOW_PHONE_HEADING) == SAILSMapView.FOLLOW_PHONE_HEADING)
-//                        //if map control mode is follow phone heading, then set mode to location center lock when button click.
-//                        mSailsMapView.setMode(mSailsMapView.getMode() & ~SAILSMapView.FOLLOW_PHONE_HEADING);
-//                    else
-//                        //if map control mode is location center lock, then set mode to follow phone heading when button click.
-//                        mSailsMapView.setMode(mSailsMapView.getMode() | SAILSMapView.FOLLOW_PHONE_HEADING);
-//                } else {
-//                    //if map control mode is none, then set mode to loction center lock when button click.
-//                    mSailsMapView.setMode(mSailsMapView.getMode() | SAILSMapView.LOCATION_CENTER_LOCK);
-//                }
             }
         }
     };
@@ -450,8 +418,9 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id) {
-            case R.id.search:
+            case R.id.action_search:
                 // TODO: handle search
+                startActivity(new Intent(this, SearchActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

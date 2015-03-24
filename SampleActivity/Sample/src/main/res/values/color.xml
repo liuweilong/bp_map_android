@@ -6,4 +6,7 @@
     <color name="primary_light_green">#99cc00</color>
     <color name="secondary_light_green">#ccff00</color>
     <color name="primary_yellow">#ffe600</color>
+    <color name="primary_black">#000</color>
+    <color name="secondary_black">#666</color>
+    <color name="light_grey">#ebebeb</color>
 </resources>

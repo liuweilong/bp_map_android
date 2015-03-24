@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.sails.example.SearchActivity">
+
+    <include android:id="@+id/search_bar"
+        layout="@layout/app_bar"></include>
+
+    <ListView
+        android:id="@+id/listview"
+        android:background="@color/primary_white"
+        android:layout_below="@+id/search_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textFilterEnabled="false"
+        android:divider="@color/light_grey"/>
+
+</RelativeLayout>
