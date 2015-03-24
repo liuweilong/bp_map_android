@@ -20,7 +20,6 @@ android {
 }
 
 dependencies {
-    compile project(':SlidingMenu')
     compile files('libs/SAILS_SDK_V1.73_Published.jar')
     compile 'com.android.support:appcompat-v7:21.0.0'
 }
