@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Sample/Sample.iml" filepath="$PROJECT_DIR$/Sample/Sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/SampleActivity.iml" filepath="$PROJECT_DIR$/SampleActivity.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SlidingMenu/SlidingMenu.iml" filepath="$PROJECT_DIR$/SlidingMenu/SlidingMenu.iml" />
     </modules>
   </component>
 </project>

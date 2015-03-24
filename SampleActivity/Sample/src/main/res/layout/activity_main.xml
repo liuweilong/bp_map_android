@@ -53,4 +53,13 @@
             android:layout_marginRight="15dp" />
     </RelativeLayout>
 
+    <ListView
+        android:id="@+id/listview"
+        android:background="@color/primary_white"
+        android:layout_below="@+id/search_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textFilterEnabled="false"
+        android:divider="@color/light_grey"/>
+
 </RelativeLayout>

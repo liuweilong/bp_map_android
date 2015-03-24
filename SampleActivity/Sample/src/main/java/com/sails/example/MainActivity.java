@@ -13,7 +13,6 @@ import com.sails.engine.PathRoutingManager;
 import com.sails.engine.PinMarkerManager;
 import com.sails.engine.SAILSMapView;
 import com.sails.engine.core.model.GeoPoint;
-import com.sails.engine.overlay.Marker;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -21,14 +20,11 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Vibrator;
 //import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Service;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -45,7 +41,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
@@ -60,8 +55,10 @@ public class MainActivity extends ActionBarActivity {
     byte zooMlevel = 18;
 
     // Variable for search function
-//    ListView list;
-//    ListViewAdapter ladapter;
+    MenuItem searchViewItem;
+    SearchView searchView;
+    ListView list;
+    ListViewAdapter ladapter;
 //    EditText editsearch;
 
     // Toolbar
@@ -74,7 +71,6 @@ public class MainActivity extends ActionBarActivity {
         // Set Customized Toolbar
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         zoomin = (ImageView) findViewById(R.id.zoomin);
         zoomout = (ImageView) findViewById(R.id.zoomout);
@@ -189,6 +185,7 @@ public class MainActivity extends ActionBarActivity {
                 });
             }
         });
+
     }
 
     void mapViewInitial() {
@@ -335,42 +332,27 @@ public class MainActivity extends ActionBarActivity {
 
                 SearchData.setMapItems(items);
 
+                list = (ListView) findViewById(R.id.listview);
+                list.setVisibility(View.INVISIBLE);
+
                 // Locate the ListView in listview_main.xml
-//                list = (ListView) findViewById(R.id.listview);
-//                list.setOnItemClickListener(listClickListener);
-//
-//                // Pass results to ListViewAdapter Class
-//                ladapter = new ListViewAdapter(MainActivity.this, items);
-//
-//                // Binds the Adapter to the ListView
-//                list.setAdapter(ladapter);
-//
-//                // Locate the EditText in listview_main.xml
-//                editsearch = (EditText) findViewById(R.id.search);
-//
-//                // Capture Text in EditText
-//                editsearch.addTextChangedListener(new TextWatcher() {
-//
-//                    @Override
-//                    public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-//                    }
-//
-//                    @Override
-//                    public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-//                    }
-//
-//                    @Override
-//                    public void afterTextChanged(Editable editable) {
-//                        String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
-//                        ladapter.filter(text);
-//                    }
-//                });
+                list.setOnItemClickListener(listClickListener);
+
+                // Pass results to ListViewAdapter Class
+                ladapter = new ListViewAdapter(MainActivity.this, SearchData.mapItems);
+
+                // Binds the Adapter to the ListView
+                list.setAdapter(ladapter);
             }
         });
     }
     ListView.OnItemClickListener listClickListener = new ListView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//            searchView.clearFocus();
+            searchView.onActionViewCollapsed();
+            list.setVisibility(View.INVISIBLE);
+
             ListViewAdapter.ViewHolder viewHolder = (ListViewAdapter.ViewHolder)view.getTag();
             LocationRegion lr = viewHolder.lr;
 
@@ -398,16 +380,49 @@ public class MainActivity extends ActionBarActivity {
         }
     };
 
-//    public void restoreActionBar() {
-//        ActionBar actionBar = getActionBar();
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-//        actionBar.setDisplayShowTitleEnabled(true);
-//    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
 //        restoreActionBar();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+
+            SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+            searchViewItem = menu.findItem(R.id.search);
+            searchView = (SearchView) searchViewItem.getActionView();
+
+            searchView.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
+
+            searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+                @Override
+                public boolean onClose() {
+                    list.setVisibility(View.GONE);
+                    return false;
+                }
+            });
+
+            searchView.setOnSearchClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    list.setVisibility(View.VISIBLE);
+                }
+            });
+
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String query) {
+                    ladapter.filter(query);
+                    return true;
+                }
+
+            });
+
+        }
         return true;
     }
 
@@ -418,10 +433,6 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_search:
-                // TODO: handle search
-                startActivity(new Intent(this, SearchActivity.class));
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
