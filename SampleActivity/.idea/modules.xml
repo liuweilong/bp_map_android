@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Sample/Sample.iml" filepath="$PROJECT_DIR$/Sample/Sample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SampleActivity.iml" filepath="$PROJECT_DIR$/SampleActivity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BPIdoorMap.iml" filepath="$PROJECT_DIR$/BPIdoorMap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BPMap/BPMap.iml" filepath="$PROJECT_DIR$/BPMap/BPMap.iml" />
     </modules>
   </component>
 </project>
