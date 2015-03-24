@@ -5,4 +5,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!--<style name="AppTheme.BaseTheme.SearchListItem">-->
+        <!--<item name="android:padding">3dp</item>-->
+        <!--<item name="android:layout_marginTop">3dp</item>-->
+        <!--<item name="android:background">@color/primary_white</item>-->
+    <!--</style>-->
+
 </resources>

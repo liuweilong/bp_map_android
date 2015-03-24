@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="wrap_content"
+    >
 
-    <TextView
-        android:id="@+id/mapItem"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/map_item_label" />
+        android:orientation="vertical"
+        android:theme="@style/AppTheme.SearchListItem"
+        >
 
-    <TextView
-        android:id="@+id/rank"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/mapItem" />
+        <TextView
+            android:id="@+id/mapItem"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:theme="@style/AppTheme.BaseTheme.SearchListItem.mainTitle"
+            android:layout_margin="0dp" />
 
-    <TextView
-        android:id="@+id/floorName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mapItem"
-        android:text="@string/floor_name_label" />
 
-    <TextView
-        android:id="@+id/country"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rank"
-        android:layout_toRightOf="@+id/floorName" />
+        <TextView
+            android:id="@+id/floorName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mapItem"
+            android:theme="@style/AppTheme.BaseTheme.SearchListItem.subTitle"
+            android:layout_margin="0dp" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -9,4 +9,23 @@
         <item name="android:textColorPrimary">@color/primary_white</item>
         <item name="android:colorPrimaryDark">@color/secondary_dark_green</item>
     </style>
+
+    <style name="AppTheme.SearchListItem" parent="AppTheme.BaseTheme">
+        <item name="android:padding">3dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:elevation">1dp</item>
+        <item name="android:background">@color/primary_white</item>
+    </style>
+
+    <style name="AppTheme.BaseTheme.SearchListItem.mainTitle" parent="AppTheme.BaseTheme">
+        <item name="android:textColor">@color/primary_black</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.BaseTheme.SearchListItem.subTitle" parent="AppTheme.BaseTheme">
+        <item name="android:textColor">@color/secondary_black</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
 </resources>
