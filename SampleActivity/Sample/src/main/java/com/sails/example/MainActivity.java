@@ -42,6 +42,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
@@ -51,7 +52,8 @@ public class MainActivity extends ActionBarActivity {
     ImageView zoomin;
     ImageView zoomout;
     Spinner floorList;
-    ArrayAdapter<String> adapter;
+//    ArrayAdapter<String> adapter;
+    SpinnerAdapter adapter;
     byte zoomSav = 0;
     byte zooMlevel = 18;
 
@@ -62,6 +64,10 @@ public class MainActivity extends ActionBarActivity {
     ListViewAdapter ladapter;
 //    EditText editsearch;
 
+    // InfoDock
+    View infoDock;
+    TextView floorNameTextView;
+
     // Toolbar
     private Toolbar toolbar;
 
@@ -70,8 +76,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Set Customized Toolbar
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+        toolBarInitial();
 
         zoomin = (ImageView) findViewById(R.id.zoomin);
         zoomout = (ImageView) findViewById(R.id.zoomout);
@@ -80,6 +85,9 @@ public class MainActivity extends ActionBarActivity {
 
         zoomin.setOnClickListener(controlListener);
         zoomout.setOnClickListener(controlListener);
+
+        floorNameTextView = (TextView) findViewById(R.id.displayFloorName);
+        infoDock = (View) findViewById(R.id.infoDock);
 
         LocationRegion.FONT_LANGUAGE = LocationRegion.NORMAL;
 
@@ -189,6 +197,15 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    void toolBarInitial() {
+        if (toolbar == null) {
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            if (toolbar != null) {
+                setSupportActionBar(toolbar);
+            }
+        }
+    }
+
     void mapViewInitial() {
         //establish a connection of SAILS engine into SAILS MapView.
         mSailsMapView.setSAILSEngine(mSails);
@@ -225,8 +242,15 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        mSailsMapView.setOnClickNothingListener(new SAILSMapView.OnClickNothingListener() {
+
+            @Override
+            public void onClick() {
+                mSailsMapView.getMarkerManager().clear();
+            }
+        });
+
         //set location region long click call back.
-        // TODO: handle regionLongClick
         mSailsMapView.setOnRegionLongClickListener(new SAILSMapView.OnRegionLongClickListener() {
             @Override
             public void onLongClick(List<LocationRegion> locationRegions) {
@@ -268,13 +292,15 @@ public class MainActivity extends ActionBarActivity {
                     position++;
                 }
                 floorList.setSelection(position);
+                floorNameTextView.setText(mSailsMapView.getCurrentBrowseFloorName());
             }
         });
 
         // Setup spinner
         // TODO: They style of choosing the floor need to be updated
-        adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, mSails.getFloorDescList());
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+//        adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, mSails.getFloorDescList());
+//        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        adapter = new SpinnerAdapter(MainActivity.this, mSails.getFloorDescList());
         floorList.setAdapter(adapter);
         floorList.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             @Override
@@ -288,6 +314,8 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
+
+        floorNameTextView.setText(mSailsMapView.getCurrentBrowseFloorName());
     }
 
     void searchInitial() {
@@ -328,6 +356,7 @@ public class MainActivity extends ActionBarActivity {
             searchView.onActionViewCollapsed();
             list.setVisibility(View.INVISIBLE);
             floorList.setVisibility(View.VISIBLE);
+            infoDock.setVisibility(View.VISIBLE);
 
             ListViewAdapter.ViewHolder viewHolder = (ListViewAdapter.ViewHolder)view.getTag();
             LocationRegion lr = viewHolder.lr;
@@ -342,6 +371,7 @@ public class MainActivity extends ActionBarActivity {
             mSailsMapView.setAnimationMoveMapTo(poi);
             mSailsMapView.getMarkerManager().clear();
             mSailsMapView.getMarkerManager().setLocationRegionMarker(lr, Marker.boundCenterBottom(getResources().getDrawable(R.drawable.map_destination)));
+            floorNameTextView.setText(lr.getName());
             // TODO: add highlight on the result place
         }
     };
@@ -376,6 +406,7 @@ public class MainActivity extends ActionBarActivity {
                         public boolean onClose() {
                             list.setVisibility(View.GONE);
                             floorList.setVisibility(View.VISIBLE);
+                            infoDock.setVisibility(View.VISIBLE);
                             return false;
                         }
                     });
@@ -385,6 +416,7 @@ public class MainActivity extends ActionBarActivity {
                         public void onClick(View v) {
                             list.setVisibility(View.VISIBLE);
                             floorList.setVisibility(View.GONE);
+                            infoDock.setVisibility(View.GONE);
                         }
                     });
 

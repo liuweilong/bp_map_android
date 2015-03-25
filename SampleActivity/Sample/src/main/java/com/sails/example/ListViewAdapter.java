@@ -68,14 +68,6 @@ public class ListViewAdapter extends BaseAdapter {
         holder.floorName.setText(mapItems.get(position).getFloorName());
         holder.lr = mapItems.get(position).getLocationRegion();
 
-		// Listen for ListView Item Click
-//		view.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View arg0) {
-//			}
-//		});
-
 		return view;
 	}
 

@@ -5,6 +5,7 @@
     </style>
 
     <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">@string/font_family</item>
         <item name="android:colorPrimary">@color/primary_dark_green</item>
         <item name="android:textColorPrimary">@color/primary_white</item>
         <item name="android:colorPrimaryDark">@color/secondary_dark_green</item>
@@ -31,6 +32,13 @@
     <style name="subTitle" parent="BaseTheme">
         <item name="android:textColor">@color/secondary_black</item>
         <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="Widget.MyApp.HeaderBar.Spinner" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:dropDownSelector">?android:selectableItemBackground</item>
+        <item name="android:divider">@null</item>
+        <item name="android:overlapAnchor">true</item>
     </style>
 
 </resources>
