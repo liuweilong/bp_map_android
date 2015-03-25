@@ -2,46 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
-        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-e06e6d975df24407614be5b4d99f10aed48c4131.jar" />
-    </item>
-    <item
-        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
+        jar="/Users/zianli/Documents/git/bp_map_android/SampleActivity/Sample/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="686344a780033e4ba22b926cd225f8d4941247e6">
-        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-53f6c0e946a0a6cdf5afc067c48c50d968c547a1.jar" />
+        <dex dex="/Users/zianli/Documents/git/bp_map_android/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-747fe9b06967b6dd4cdc88115e45b5ad3a709ac1.jar" />
     </item>
     <item
-        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/SampleActivity/SlidingMenu/unspecified/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="6d59f19b5d6f3b22899e10546fd2c889334509a0">
-        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-1bf8808191a87cc6e0b3bc159caa479f986f41ac.jar" />
-    </item>
-    <item
-        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/libs/SAILS_SDK_V1.73_Published.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="2b4ea6e0b35513f0ac8d736342ebca9d6bd7d719">
-        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/SAILS_SDK_V1.73_Published-18524634433085176bb48474b90e8eef9e0c42da.jar" />
-    </item>
-    <item
-        jar="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar"
+        jar="/Users/zianli/Documents/git/bp_map_android/SampleActivity/Sample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="95fd37732ec852e99f07eeb516a3650172f1d136">
-        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-565a0d91466d9b03712e0fdc7ee7913f39b0f0eb.jar" />
+        <dex dex="/Users/zianli/Documents/git/bp_map_android/SampleActivity/Sample/build/intermediates/pre-dexed/debug/classes-e8e6ae4ff96eef524eb6be8156f95d23ed9da4a1.jar" />
     </item>
     <item
-        jar="/Users/wedrago/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
+        jar="/Applications/adt-bundle-mac-x86_64-20140321/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
-        <dex dex="/Users/wedrago/Development/BP_map/androidstudio/SampleActivity/Sample/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-613b105ea64b36292c1fa10aaf9788bc21b513d8.jar" />
+        <dex dex="/Users/zianli/Documents/git/bp_map_android/SampleActivity/Sample/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-8f3e11be169cfb10f9527af9409fa79756328c74.jar" />
+    </item>
+    <item
+        jar="/Users/zianli/Documents/git/bp_map_android/SampleActivity/Sample/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
+        <dex dex="/Users/zianli/Documents/git/bp_map_android/SampleActivity/Sample/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-5c4c869a59c46d3b8cf23ac5025cdb8c3fce326b.jar" />
     </item>
 
 </items>
