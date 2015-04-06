@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="debug1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/SampleActivity/BPMap/build/intermediates/pre-dexed/debug/classes-53f6c0e946a0a6cdf5afc067c48c50d968c547a1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SampleActivity/BPMap/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-e06e6d975df24407614be5b4d99f10aed48c4131.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SampleActivity/BPMap/build/intermediates/pre-dexed/debug/SAILS_SDK_V1.73_Published-18524634433085176bb48474b90e8eef9e0c42da.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SampleActivity/BPMap/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-613b105ea64b36292c1fa10aaf9788bc21b513d8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/SampleActivity/BPMap/build/intermediates/pre-dexed/debug/classes-565a0d91466d9b03712e0fdc7ee7913f39b0f0eb.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -44,6 +44,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -63,6 +64,12 @@ public class MainActivity extends ActionBarActivity {
     ListView list;
     ListViewAdapter ladapter;
 //    EditText editsearch;
+
+    // Variable for location region
+    LocationRegion startRegion;
+    LocationRegion endRegion;
+    boolean hasStartRegion;
+    boolean hasStartAndEndRegion;
 
     // InfoDock
     View infoDock;
@@ -90,6 +97,9 @@ public class MainActivity extends ActionBarActivity {
         infoDock = (View) findViewById(R.id.infoDock);
 
         LocationRegion.FONT_LANGUAGE = LocationRegion.NORMAL;
+        // Init hasStartRegion to false
+        hasStartRegion = false;
+        hasStartAndEndRegion = false;
 
         //new a SAILS engine.
         mSails = new SAILS(this);
@@ -171,6 +181,7 @@ public class MainActivity extends ActionBarActivity {
                 //please change token and building id to your own building project in cloud.
                 // 29008b47625243bca00ffdd4e52af10f 5508f92fd98797a814001afc
                 // 96af8361581f43a1b7a27ba618aa6695 5511570fd98797a814001c1d
+                // 5511570fd98797a814001c1d
                 mSails.loadCloudBuilding("96af8361581f43a1b7a27ba618aa6695", "5511570fd98797a814001c1d", new SAILS.OnFinishCallback() {
                     @Override
                     public void onSuccess(final String response) {
@@ -181,6 +192,7 @@ public class MainActivity extends ActionBarActivity {
                                 t.show();
                                 mapViewInitial();
                                 searchInitial();
+//                                routingInitial();
                             }
                         });
 
@@ -223,12 +235,48 @@ public class MainActivity extends ActionBarActivity {
         //Auto Adjust suitable map zoom level and position to best view position.
         mSailsMapView.autoSetMapZoomAndView();
 
+        // set markers for start region and end region
+        mSailsMapView.getRoutingManager().setStartMakerDrawable(Marker.boundCenter(getResources().getDrawable(R.drawable.destination)));
+        mSailsMapView.getRoutingManager().setTargetMakerDrawable(Marker.boundCenterBottom(getResources().getDrawable(R.drawable.map_destination)));
+
+
         //set location region click call back.
+        // First click to set start region and second click to set end region
         // TODO: handleOnRegionClick
         mSailsMapView.setOnRegionClickListener(new SAILSMapView.OnRegionClickListener() {
             @Override
             public void onClick(List<LocationRegion> locationRegions) {
+                Toast t;
                 LocationRegion lr = locationRegions.get(0);
+                Log.d("Location", lr.label);
+                if (!hasStartRegion) {
+                    mSailsMapView.getRoutingManager().disableHandler();
+                    startRegion = lr;
+                    hasStartRegion = true;
+                    t = Toast.makeText(getBaseContext(), "StartRegion loaded", Toast.LENGTH_SHORT);
+
+                } else {
+                    endRegion = lr;
+                    hasStartRegion = false;
+                    hasStartAndEndRegion = true;
+                    t = Toast.makeText(getBaseContext(), "EndRegion loaded", Toast.LENGTH_SHORT);
+                }
+
+
+                // path routing
+                if (hasStartAndEndRegion) {
+                    mSailsMapView.getRoutingManager().setStartRegion(startRegion);
+                    mSailsMapView.getRoutingManager().setTargetRegion(endRegion);
+                    mSailsMapView.getRoutingManager().getPathPaint().setColor(0xFF85b038);
+                    Log.d("Location", "getStartRegion: " + mSailsMapView.getRoutingManager().getStartRegion().label);
+                    Log.d("Location", "getEndRegion: " + mSailsMapView.getRoutingManager().getTargetRegion().label);
+                    mSailsMapView.getRoutingManager().enableHandler();
+                    Log.d("Location", "path distance: " + mSailsMapView.getRoutingManager().getPathDistance());
+                    hasStartAndEndRegion = false;
+                }
+                t.show();
+
+
             }
         });
 
@@ -388,6 +436,7 @@ public class MainActivity extends ActionBarActivity {
             }
         }
     };
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
