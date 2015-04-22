@@ -9,4 +9,5 @@
     <string name="title_search">Search</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_direction">Direction</string>
 </resources>

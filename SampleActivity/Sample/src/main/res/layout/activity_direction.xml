@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sails.example.DirectionActivity">
+
+    <!--<include android:id="@+id/toolbar"-->
+        <!--layout="@layout/app_bar"></include>-->
+    <!--<TextView android:text="@string/hello_world" android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <include android:id="@+id/direction_actionbar"
+        layout="@layout/direction_actionbar"></include>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/direction_panel"
+        android:layout_below="@+id/direction_actionbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/primary_dark_green">
+
+            <Button
+                android:id="@+id/button_route"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Route"
+                android:textSize="20dp"
+                android:background="@color/primary_dark_green"
+                android:textAllCaps="false"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/location_input"
+                android:layout_toLeftOf="@+id/button_route">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/setStartLocation"
+                    >
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/primary_dark_green"
+                        android:textSize="20dp"
+                        android:text="Start Location"
+                        android:gravity="center"
+                        android:textAllCaps="false"
+                        android:id="@+id/button_start_location"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/setStartLocation"
+                    >
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/primary_dark_green"
+                        android:textSize="20dp"
+                        android:text="End Location"
+                        android:gravity="center"
+                        android:textAllCaps="false"
+                        android:id="@+id/button_end_location"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/direction_panel"
+        android:visibility="visible"
+        android:id="@+id/SAILSMap" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/direction_actionbar"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@color/light_grey"
+            android:textFilterEnabled="false">
+        </ListView>
+        </RelativeLayout>
+
+
+</RelativeLayout>
