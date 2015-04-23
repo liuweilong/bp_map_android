@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,6 +41,9 @@ import java.util.List;
 //import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 //import android.app.ActionBar;
 
+// TODO: long press can have option to start routing
+// TODO: legend
+
 public class MainActivity extends ActionBarActivity {
 
     // Variabls to share with DirectionActivity
@@ -47,10 +51,9 @@ public class MainActivity extends ActionBarActivity {
     private SAILSMapView mSailsMapView;
 
 
-    ImageView zoomin;
-    ImageView zoomout;
+//    ImageView zoomin;
+//    ImageView zoomout;
     Spinner floorList;
-//    ArrayAdapter<String> adapter;
     SpinnerAdapter adapter;
     byte zoomSav = 0;
     byte zooMlevel = 18;
@@ -63,14 +66,15 @@ public class MainActivity extends ActionBarActivity {
 
 
     // InfoDock
-    View infoDock;
-    TextView floorNameTextView;
+//    View infoDock;
+//    TextView floorNameTextView;
 
     // Toolbar
     private Toolbar toolbar;
 
     // Button to invoke DirectionActivity
     Button directionButton;
+    protected static LocationRegion startLocationRegion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,16 +83,16 @@ public class MainActivity extends ActionBarActivity {
         // Set Customized Toolbar
         toolBarInitial();
 
-        zoomin = (ImageView) findViewById(R.id.zoomin);
-        zoomout = (ImageView) findViewById(R.id.zoomout);
+//        zoomin = (ImageView) findViewById(R.id.zoomin);
+//        zoomout = (ImageView) findViewById(R.id.zoomout);
 
         floorList = (Spinner) findViewById(R.id.spinner_nav);
 
-        zoomin.setOnClickListener(controlListener);
-        zoomout.setOnClickListener(controlListener);
+//        zoomin.setOnClickListener(controlListener);
+//        zoomout.setOnClickListener(controlListener);
 
-        floorNameTextView = (TextView) findViewById(R.id.displayFloorName);
-        infoDock = (View) findViewById(R.id.infoDock);
+//        floorNameTextView = (TextView) findViewById(R.id.displayFloorName);
+//        infoDock = (View) findViewById(R.id.infoDock);
 
         LocationRegion.FONT_LANGUAGE = LocationRegion.NORMAL;
 
@@ -205,11 +209,15 @@ public class MainActivity extends ActionBarActivity {
         directionButton = (Button) findViewById(R.id.direction);
         directionButton.setOnClickListener(new OnClickListener() {
             public void onClick(View arg0) {
-                Intent myIntent = new Intent(MainActivity.this, DirectionActivity.class);
-                MainActivity.this.startActivity(myIntent);
+               goToDirectionActivity();
             }
         });
 
+    }
+
+    public void goToDirectionActivity() {
+        Intent myIntent = new Intent(MainActivity.this, DirectionActivity.class);
+        MainActivity.this.startActivity(myIntent);
     }
 
    void toolBarInitial() {
@@ -275,11 +283,9 @@ public class MainActivity extends ActionBarActivity {
         mSailsMapView.setOnRegionLongClickListener(new SAILSMapView.OnRegionLongClickListener() {
             @Override
             public void onLongClick(List<LocationRegion> locationRegions) {
-                if (mSails.isLocationEngineStarted())
-                    return;
-
+                startLocationRegion = locationRegions.get(0);
                 mSailsMapView.getMarkerManager().clear();
-                mSailsMapView.getRoutingManager().setStartRegion(locationRegions.get(0));
+//                mSailsMapView.getRoutingManager().setStartRegion(locationRegions.get(0));
                 mSailsMapView.getMarkerManager().setLocationRegionMarker(locationRegions.get(0), Marker.boundCenter(getResources().getDrawable(R.drawable.map_destination)));
             }
         });
@@ -313,7 +319,7 @@ public class MainActivity extends ActionBarActivity {
                     position++;
                 }
                 floorList.setSelection(position);
-                floorNameTextView.setText(mSailsMapView.getCurrentBrowseFloorName());
+//                floorNameTextView.setText(mSailsMapView.getCurrentBrowseFloorName());
             }
         });
 
@@ -336,7 +342,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        floorNameTextView.setText(mSailsMapView.getCurrentBrowseFloorName());
+//        floorNameTextView.setText(mSailsMapView.getCurrentBrowseFloorName());
     }
 
     void searchInitial() {
@@ -373,11 +379,10 @@ public class MainActivity extends ActionBarActivity {
     ListView.OnItemClickListener listClickListener = new ListView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//            searchView.clearFocus();
             searchView.onActionViewCollapsed();
             list.setVisibility(View.INVISIBLE);
             floorList.setVisibility(View.VISIBLE);
-            infoDock.setVisibility(View.VISIBLE);
+//            infoDock.setVisibility(View.VISIBLE);
 
             ListViewAdapter.ViewHolder viewHolder = (ListViewAdapter.ViewHolder)view.getTag();
             LocationRegion lr = viewHolder.lr;
@@ -392,23 +397,22 @@ public class MainActivity extends ActionBarActivity {
             mSailsMapView.setAnimationMoveMapTo(poi);
             mSailsMapView.getMarkerManager().clear();
             mSailsMapView.getMarkerManager().setLocationRegionMarker(lr, Marker.boundCenterBottom(getResources().getDrawable(R.drawable.map_destination)));
-            floorNameTextView.setText(lr.getName());
-            // TODO: add highlight on the result place
+//            floorNameTextView.setText(lr.getName());
         }
     };
 
-    View.OnClickListener controlListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (v == zoomin) {
-                //set map zoomin function.
-                mSailsMapView.zoomIn();
-            } else if (v == zoomout) {
-                //set map zoomout function.
-                mSailsMapView.zoomOut();
-            }
-        }
-    };
+//    View.OnClickListener controlListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            if (v == zoomin) {
+//                //set map zoomin function.
+//                mSailsMapView.zoomIn();
+//            } else if (v == zoomout) {
+//                //set map zoomout function.
+//                mSailsMapView.zoomOut();
+//            }
+//        }
+//    };
 
 
     @Override
@@ -428,7 +432,7 @@ public class MainActivity extends ActionBarActivity {
                         public boolean onClose() {
                             list.setVisibility(View.GONE);
                             floorList.setVisibility(View.VISIBLE);
-                            infoDock.setVisibility(View.VISIBLE);
+//                            infoDock.setVisibility(View.VISIBLE);
                             return false;
                         }
                     });
@@ -438,7 +442,7 @@ public class MainActivity extends ActionBarActivity {
                         public void onClick(View v) {
                             list.setVisibility(View.VISIBLE);
                             floorList.setVisibility(View.GONE);
-                            infoDock.setVisibility(View.GONE);
+//                            infoDock.setVisibility(View.GONE);
                         }
                     });
 

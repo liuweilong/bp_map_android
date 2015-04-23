@@ -46,17 +46,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/setStartLocation"
-                    >
+                    android:id="@+id/setStartLocation">
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/primary_dark_green"
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:text="Start Location"
-                        android:gravity="center"
+                        android:gravity="center_vertical|left"
                         android:textAllCaps="false"
-                        android:id="@+id/button_start_location"/>
+                        android:id="@+id/button_start_location"
+                        android:paddingLeft="6dp"
+                        android:textColor="@color/primary_white" />
 
                 </RelativeLayout>
 
@@ -64,18 +65,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_below="@+id/setStartLocation"
-                    >
+                    android:layout_below="@+id/setStartLocation">
 
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/primary_dark_green"
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:text="End Location"
-                        android:gravity="center"
+                        android:gravity="center_vertical|left"
                         android:textAllCaps="false"
-                        android:id="@+id/button_end_location"/>
+                        android:id="@+id/button_end_location"
+                        android:paddingLeft="6dp"
+                        android:textColor="@color/primary_white" />
                 </RelativeLayout>
             </LinearLayout>
         </RelativeLayout>

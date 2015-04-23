@@ -11,11 +11,31 @@
         <item name="android:colorPrimaryDark">@color/secondary_dark_green</item>
         <item name="android:navigationBarColor">@color/secondary_dark_green</item>
         <item name="android:colorAccent">@color/primary_white</item>
+        <item name="android:searchViewStyle">@style/MySearchViewStyle</item>
     </style>
 
     <style name="ActionBarTheme" parent="BaseTheme">
-        <item name="android:colorAccent">@color/primary_white</item>
+
     </style>
+
+    <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+    <!-- Background for the search query section (e.g. EditText) -->
+    <!--<item name="queryBackground">@color/primary_white</item>-->
+    <!-- Background for the actions section (e.g. voice, submit) -->
+    <!--<item name="submitBackground">@color/primary_yellow</item>-->
+    <!-- Close button icon -->
+    <!--<item name="closeIcon">...</item>-->
+    <!-- Search button icon -->
+    <!--<item name="searchIcon">@color/primary_white</item>-->
+    <!-- Go/commit button icon -->
+    <!--<item name="goIcon">...</item>-->
+    <!-- Voice search button icon -->
+    <!--<item name="voiceIcon">...</item>-->
+    <!-- Commit icon shown in the query suggestion row -->
+    <!--<item name="commitIcon">...</item>-->
+    <!-- Layout for query suggestion rows -->
+    <!--<item name="suggestionRowLayout">...</item>-->
+</style>
 
     <style name="AppTheme.SearchListItem" parent="BaseTheme">
         <item name="android:padding">5dp</item>

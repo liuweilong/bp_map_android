@@ -2,6 +2,7 @@ package com.sails.example;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -71,6 +72,7 @@ public class DirectionActivity extends ActionBarActivity {
         //new and insert a SAILS MapView from layout resource.
         mSailsMapView = new SAILSMapView(this);
         ((FrameLayout) findViewById(R.id.SAILSMap)).addView(mSailsMapView);
+
         //configure SAILS map after map preparation finish.
         mSailsMapView.post(new Runnable() {
             @Override
@@ -119,11 +121,19 @@ public class DirectionActivity extends ActionBarActivity {
 
     // Initial buttons to set start location, end location and to start routing
     void locationButtonInitial() {
-        hasStartLocation = false;
-        hasEndLocation = false;
+
         startButton = (Button) findViewById(R.id.button_start_location);
         endButton = (Button) findViewById(R.id.button_end_location);
         routeButton = (Button) findViewById(R.id.button_route);
+
+        if (MainActivity.startLocationRegion != null) {
+            hasStartLocation = true;
+            startLocation = MainActivity.startLocationRegion;
+            startButton.setText(startLocation.getName());
+        } else {
+            hasStartLocation = false;
+        }
+        hasEndLocation = false;
 
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
